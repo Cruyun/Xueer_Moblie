@@ -12,9 +12,8 @@ let SignService = {
       method: "GET"
     });
   },
-  getToken() {
-    var email = getEmail();
-    return Fetch("/api/v1.0/token", {
+  getToken(email) {
+    return Fetch("/api/v1.0/token/", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -24,7 +23,7 @@ let SignService = {
     });
   },
   register(username, email) {
-    return Fetch("/api/v1.0/users", {
+    return Fetch("/api/v1.0/users/", {
       method: "POST",
       data: {
         username: username,

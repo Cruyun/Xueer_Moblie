@@ -40,6 +40,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
+import Cookie from "../../service/cookie";
 
 export default {
   computed: {
@@ -72,8 +73,9 @@ export default {
       // this.changePageFlagN(['is_all','is_auth','is_recommend','is_sub'])
     },
     toLogin() {
+      Cookie.setCookie('url', window.location.href);
       //window.location = "https://user.muxixyz.com/?http://xueer.muxixyz.com/landing"
-      window.location.href =
+      window.location.href = 
         "/landing/?email=1045671796%40qq.com&token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNDAzMDQyNywiaWF0IjoxNTE0MDI2ODI3fQ.eyJpZCI6MjY3fQ.bOgABI7EbpNgqhd1IT-6xvRiq4PHrTkZKkYe6zQxnNc";
     }
   }
@@ -88,7 +90,7 @@ export default {
   width: 100%;
   background: #fff;
   z-index: 101;
-  box-shadow: 0 0 0.111111rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 .container {
   width: 328px;

@@ -1,3 +1,6 @@
+import SignService from '../service/sign';
+import Cookie from '../service/cookie';
+
 const actions = {
   changePageFlagN({ commit }, flag) {
     commit("changePageFlagN", flag);
@@ -20,8 +23,27 @@ const actions = {
   initData({ commit }, data) {
     commit("initData", data);
   },
-  getToken({ commit }, token) {
-    commit("getToken", token);
+  getToken({ commit }) {
+    let email = SignService.getEmail();
+    SignService.getToken(email).then(res => {
+      if (res !== null && res !== undefined){
+        commit("getToken", res.token);
+        commit("isLogin");
+        commit("isLoading", false);
+        window.location.href = Cookie.getCookie("url");
+      } else {
+        SignService.getUsername(email).then(info => {
+          SignService.register(info.username, email).then(res => {
+            SignService.getToken(email).then(res => {
+              commit("getToken", res.token);
+              commit("isLogin");
+              commit("isLoading", false);
+              window.location.href = Cookie.getCookie("url");
+            })
+          })
+        })  
+      }
+    })
   }
 };
 

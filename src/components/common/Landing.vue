@@ -1,35 +1,28 @@
 <template>
     <div>
-        <Loading></Loading>
+        <!-- <Loading></Loading> -->
     </div>
 </template>
 <script>
-import Loading from "./Loading";
+// import Loading from "./Loading";
 import { mapState, mapGetter, mapActions, mapMutations } from "vuex";
-import SignService from "../../service/sign.js";
 
 export default {
   data() {
-    return {
-      email: "",
-      username: ""
-    };
+    return {};
   },
   computed: {
     ...mapState(["is_loading", "is_logined", "token"])
   },
-  components: {
-    Loading: Loading
-  },
+  // components: {
+  //   Loading: Loading
+  // },
   methods: {
-    ...mapActions(["getToken"])
+    ...mapActions(["isLoading", "getToken"])
   },
-  mounted() {
-    this.email = SignService.getEmail();
-    this.username = SignService.getUsername(this.email);
-    SignService.register(this.username, this.email).then(res => {
-      this.getToken();
-    });
+  created() {
+    this.isLoading(true);
+    this.getToken()
   }
 };
 </script>
