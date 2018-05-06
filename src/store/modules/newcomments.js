@@ -1,3 +1,5 @@
+import DetailService from "../../service/detail";
+
 const state = {
   tag: "",
   pre_tags: []
@@ -8,32 +10,44 @@ const getters = {
 };
 const actions = {
   preTags({ commit }, val) {
-    commit("preTags", val);
+      // tags是正在输入的标签,用逗号判断是否输入完一个标签
+      const tags = val
+        .split(",")
+        .join("，")
+        .split("，");
+      if (tags.length > 1) {  // 已经输入完一个标签
+        commit("addPreTag", tags[0]); // 假如标签列表
+        commit("clearTag"); // 清空现在正在输入的标签内容
+      } else {
+        commit("typingTag", tags); // 正在输入标签
+      }
   },
   deleteTag({ commit }) {
-    commit("deleteTag");
+    if (state.tag.length == 0 && state.pre_tags.length > 0) {
+      commit("deleteTag");
+    }
   },
   clickTag({ commit }) {
     commit("clickTag");
+  },
+  submitComment(context, body) {
+    DetailService.newComment(body.course_id, body.token, body.comment_text).then(res => {
+      window.location.href = "/course/" + body.course_id;
+    })
   }
 };
 const mutations = {
-  preTags(state, val) {
-    const tags = val
-      .split(",")
-      .join("，")
-      .split("，");
-    if (tags.length > 1) {
-      state.pre_tags.push(tags[0]);
-      state.tag = "";
-    } else {
-      state.tag = tags + "";
-    }
+  addPreTag(state, tag) {
+    state.pre_tags.push(tag);
+  },
+  clearTag(state) {
+    state.tag = "";
+  },
+  typingTag(state, tags) {
+    state.tag = tags + "";
   },
   deleteTag(state) {
-    if (state.tag.length == 0 && state.pre_tags.length > 0) {
-      state.pre_tags.pop();
-    }
+    state.pre_tags.pop();
   },
   clickTag(state, val) {
     state.pre_tags.push(val);

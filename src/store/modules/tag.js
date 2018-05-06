@@ -7,21 +7,18 @@ const getters = {
 };
 const actions = {
   getTags({ commit }) {
-    commit("getTags");
+    TagService.getTags().then(json => {
+      if (json !== "" || json !== null || json != undefined) {
+        for (let i = 0; i < json.length; i++) {
+          commit("getTags", json[i].title);
+        }
+      }
+    });
   }
 };
 const mutations = {
-  getTags(state) {
-    /*
-		const url = '/api/v1.0/tags/'
-		fetch(url).then(response => {
-			response.json()
-			*/
-    TagService.getTags().then(json => {
-      for (let i = 0; i < 4; i++) {
-        state.hot_tag.push(json[i].title);
-      }
-    });
+  getTags(state, title) {
+    state.hot_tag.push(title);
   }
 };
 export default {

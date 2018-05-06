@@ -1,14 +1,14 @@
 <template>
 	<div :class="$style.new_comment">
 		<div :class="$style.new_comment_box">
-			<textarea :class="$style.comment_cont" placeholder="写评论..."></textarea>
+			<textarea :class="$style.comment_cont" placeholder="写评论..." v-model="comment_text"></textarea>
 			<div :class="$style.tag_cont">
 				<svg :class="[$style.nav_icon, $style.tag_icon]">
 		            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#tag_icon"></use>
 		        </svg>
 		        <div :class="$style.input_cont">
 		        	<div :class="$style.pre_tags">
-		        		<span :class="$style.pre_tags_item" v-for="item in pre_tags">{{ item | preTag }}</span>
+		        		<span :class="$style.pre_tags_item" v-for="item in pre_tags" :key="item.id" >{{ item | preTag }}</span>
 		        	</div>
 		        	<div :class="$style.input_box">
 		        		<input @keyup.delete="deleteTag" v-model='tags' :class="$style.tag_input" type="text" name="tag" placeholder="添加标签：输入一个标签后逗号间隔开">
@@ -18,8 +18,8 @@
 		</div>
 		<tag></tag>
 		<div :class="$style.btns">
-			<div :class="[$style.btn,$style.btn_left]">返回</div>
-			<div :class="[$style.btn,$style.btn_right]">提交</div>
+			<div :class="[$style.btn,$style.btn_left]" @click="backStep">返回</div>
+			<div :class="[$style.btn,$style.btn_right]" @click="setComment">提交</div>
 		</div>
 	</div>
 </template>
@@ -32,23 +32,37 @@ import Tag from "../common/Tag.vue";
 export default {
   data() {
     return {
-      tags: ""
+      tags: "",
+      comment_text: "",
+      submit_body: {
+        type: Object
+      }
     };
   },
   computed: {
-    ...mapGetters(["tag", "pre_tags"])
+    ...mapGetters(["tag", "pre_tags", "token", "info"])
   },
   filters: {
     preTag
   },
   watch: {
     tags(val) {
-      this.$store.commit("preTags", val);
+      this.preTags(val);
       this.tags = this.tag;
     }
   },
   methods: {
-    ...mapActions(["deleteTag"])
+    ...mapActions(["preTags", "deleteTag", "submitComment"]),
+    setComment() {
+      // 发送评论请求的 data
+      this.submit_body.course_id = this.info.id;
+      this.submit_body.comment_text = this.comment_text;
+      this.submit_body.token = this.token;
+      this.submitComment(this.submit_body);
+    },
+    backStep() {
+      history.back();
+    },
   },
   components: {
     Tag

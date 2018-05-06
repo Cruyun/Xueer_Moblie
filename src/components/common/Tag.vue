@@ -1,6 +1,6 @@
 <template>
-	<div @click='add_tag' :class='$style.tags'>
-		<span v-for='item in hot_tag' :class='$style.tags_item'>{{ item }}</span>
+	<div @click='addTag' :class='$style.tags'>
+		<span v-for='item in hot_tag' :class='$style.tags_item' :key="item.id">{{ item }}</span>
 	</div>
 </template>
 <script>
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     ...mapActions(["clickTag", "getTags"]),
-    add_tag(ev) {
+    addTag(ev) {
       if (ev.target.tagName == "SPAN" || "span") {
         if (this.val == ev.target.textContent) {
           return;

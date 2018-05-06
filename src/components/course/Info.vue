@@ -27,9 +27,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["info"],
-  // computed: {
-  //   ...mapGetters(["info"])
-  // },
+  computed: {
+    ...mapGetters(["is_logined", "course_id"])
+  },
   // created() {
   //   this.fetchInfo(this.id);
   // },
@@ -40,8 +40,11 @@ export default {
       this.courseLike();
     },
     writeComment() {
-      this.$router.push("comment");
-      // this.showLogin(true)
+      if (this.is_logined) {
+        this.$router.push({path: `/course/${this.info.id}/comment`});
+      } else {
+        this.showLogin(true)
+      }
     }
   }
 };
@@ -122,10 +125,10 @@ export default {
   text-align: center;
   font-size: 28px; /*px*/
 }
-.heart_icon,
-.heart_icon_filled {
-  transform: translateX(-5.555556rem);
-}
+// .heart_icon,
+// .heart_icon_filled {
+//   transform: translateX(-5.555556rem);
+// }
 .heart_icon {
   animation-fill-mode: forwards;
   animation: heart_s ease-in-out 1s;

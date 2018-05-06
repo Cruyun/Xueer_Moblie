@@ -47,6 +47,17 @@ export default function FetchData(url, opt = {}) {
             };
           }
           return json;
+        case 201:
+          if (opt.responseHeaders && opt.responseHeaders.length) {
+            headers = opt.responseHeaders.map(key => {
+              return response.headers.get(key);
+            });
+            return {
+              json,
+              headers
+            };
+          }
+          return json;
         case 502:
           // util.message is not defined
           util.message(response.statusText, "err");

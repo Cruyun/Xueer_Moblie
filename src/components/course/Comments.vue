@@ -1,6 +1,6 @@
 <template>
 	<div :class="$style.comments">
-		<li v-for="item in comments" :class="$style.comment_item">
+		<li v-for="item in comments" :class="$style.comment_item" :key="item.id">
 	        <div :class="$style.space">
 	            <div :class="$style.avatar">
 					<img src="http://xueer.muxixyz.com/static/x_m/avatar.png">
