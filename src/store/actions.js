@@ -2,6 +2,9 @@ import SignService from '../service/sign';
 import Cookie from '../service/cookie';
 
 const actions = {
+  changeCurrentRoute({ commit }, path) {
+    commit("changeCurrentRoute", path);
+  },
   changePageFlagN({ commit }, flag) {
     commit("changePageFlagN", flag);
   },

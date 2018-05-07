@@ -2,7 +2,7 @@
 	<div :class="$style.nav_bar">
 		<div :class="$style.container">
 			<div :class="$style.title_set">
-				<div v-if="is_index">
+				<div v-if="currentRoute === 'index'">
 					<router-link :class="[$style.active,$style.link]" :to="{ name: 'index', params: { page: 'index' }}">
 						<svg :class="[$style.nav_icon, $style.logo]">
 							<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo"></use>
@@ -10,17 +10,17 @@
 						<!-- <span v-if="is_search" :class="[$style.title_s, $style.title]">搜索</span> -->
 					</router-link>
 				</div>
-				<!-- <div @click="backStep">
-					<svg  v-if="!is_index" viewBox="0 0 34 34" :class="[$style.back, $style.nav_icon]">
+				<div @click="backStep">
+					<svg  v-if="currentRoute !== 'index'" viewBox="0 0 34 34" :class="[$style.back, $style.nav_icon]">
 						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
 					</svg>
-					<span v-if="is_all" :class="[$style.title_l, $style.title]">所有课程</span>
-					<span v-if="is_search_res" :class="[$style.title_l, $style.title]">搜索结果</span>
+					<span v-if="currentRoute === 'all'" :class="[$style.title_l, $style.title]">所有课程</span>
+        	<span v-if="currentRoute === 'course'" :class="[$style.title_l, $style.title]">课程详情</span>
+					<!-- <span v-if="is_search_res" :class="[$style.title_l, $style.title]">搜索结果</span>
 					<span v-if="is_recommend" :class="[$style.title_l, $style.title]">推荐课程</span>
 					<span v-if="is_auth" :class="[$style.title_l, $style.title]">我的学而</span>
-					<span v-if="is_course" :class="[$style.title_l, $style.title]">课程详情</span>
-					<span v-if="is_sub" :class="[$style.title_l, $style.title]">专题</span>
-				</div> -->
+					<span v-if="is_sub" :class="[$style.title_l, $style.title]">专题</span> -->
+				</div>
 			</div>
 			<div :class="$style.icon_set">
 				<div @click="displaySearch" data-link="/search" :class="[$style.nav_icon, $style.search]">
@@ -44,7 +44,7 @@ import Cookie from "../../service/cookie";
 
 export default {
   computed: {
-    ...mapState(["page_flag"]),
+    ...mapState(["page_flag", "currentRoute"]),
     ...mapGetters([
       "snaps",
       "is_index",
@@ -64,7 +64,7 @@ export default {
       "getSnaps"
     ]),
     backStep() {
-      history.back();
+      this.$router.go(-1);
     },
     displaySearch() {
       this.getSnaps(this.snaps);

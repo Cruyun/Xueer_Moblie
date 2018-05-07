@@ -1,7 +1,6 @@
-##Xueer FE Serivce 2.0
+## Xueer FE Serivce 2.0
 
 Proudly prowered by Vuejs, Vuex and Vue-router.
-
 
 ### Develop
 
@@ -13,21 +12,22 @@ ninja start
 ### Deployment
 
 ```
+
 ```
 
 ### RoadMap
 
 #### Now
 
-+ Add HTML compliation
-+ Recycle View for list
-+ Add server side code
-+ Muxi auth integration
-+ Add PC FE code
-+ Full Code Review
+* Add HTML compliation
+* Recycle View for list
+* Add server side code
+* Muxi auth integration
+* Add PC FE code
+* Full Code Review
 
 #### Long-term
 
-+ Refactor Mangament Service
-+ PWA support
-+ UX enchancement
+* Refactor Mangament Service
+* PWA support
+* UX enchancement

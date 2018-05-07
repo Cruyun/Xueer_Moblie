@@ -1,4 +1,7 @@
 const mutations = {
+  changeCurrentRoute(state, path) {
+    state.currentRoute = path;
+  },
   changePageFlagN(state, flag) {
     if (Object.prototype.toString.call(flag) === "[object String]") {
       state[flag] = false;

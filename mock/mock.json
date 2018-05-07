@@ -12,6 +12,12 @@
       "async": true
     },
     {
+      "name": "landing",
+      "endpoint": "/landing",
+      "template": "index",
+      "async": false
+    },
+    {
       "name": "all",
       "endpoint": "/all",
       "template": "index",

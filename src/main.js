@@ -8,6 +8,12 @@ import VueResource from "vue-resource";
 Vue.use(VueResource);
 /* eslint-disable no-new */
 
+// Global hook, sync current route to store
+router.beforeEach((to, from, next) => {
+  store.dispatch("changeCurrentRoute", to.name);
+  next();
+});
+
 new Vue({
   el: "#app",
   store,

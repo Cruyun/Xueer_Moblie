@@ -12,7 +12,8 @@ const state = {
   show_login: false,
   is_logined: false,
   fetch_flag: true,
-  token: ""
+  token: "",
+  currentRoute: ""
 };
 
 export default state;
