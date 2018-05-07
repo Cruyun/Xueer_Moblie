@@ -3,7 +3,6 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const postcss = require('postcss');
-const px2rem = require('postcss-px2rem');
 const csso = require('postcss-csso');
 var projectRoot = path.resolve(__dirname, '../');
 module.exports = {
@@ -58,9 +57,9 @@ module.exports = {
     vue: {
         postcss: function() {
             let arr = [
-                px2rem({
-                    remUnit: 36
-                }),
+                // px2vw({
+                //     remUnit: 36
+                // }),
                 csso({
                     restructure: false
                 })

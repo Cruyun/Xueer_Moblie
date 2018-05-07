@@ -4,9 +4,7 @@ const utils = require('./util')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const webpack = require('webpack')
-// const px2rem = require('postcss-px2rem');
 const px2vw = require('postcss-px-to-vw');
-
 process.noDeprecation = true
 
 function resolve(dir) {
@@ -29,7 +27,6 @@ module.exports = {
                     loader: 'vue-loader',
                     options: {
                         extractCSS: process.env.NODE_ENV === 'production',
-                        // postcss: [px2rem({remUnit: 36})],
                         postcss: [px2vw({vwUnit: 360})]
                     }
                 }, {

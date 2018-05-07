@@ -1,10 +1,10 @@
 import CourseListService from "../../service/courselist";
-// const MAIN_CAT_MAP = {
-//   0: "gg_cat",
-//   1: "ts_cat",
-//   2: "zy_cat",
-//   3: "sz_cat"
-// };
+const MAIN_CAT_MAP = {
+  0: "gg_cat",
+  1: "ts_cat",
+  2: "zy_cat",
+  3: "sz_cat"
+};
 
 // params hepler
 function getQueryParams(state) {
@@ -14,14 +14,14 @@ function getQueryParams(state) {
     sort: state.sort,
     pre_page: state.pre_page
   };
-  if (state.catgories.length >= 0) {
-    state.catgories.forEach(item => {
-      obj[item] = 1;
-    });
+  if (state.main_cat >= 0) {
+    mainCatKey = MAIN_CAT_MAP[state.main_cat];
+    obj[mainCatKey] = 1;
   }
   return obj;
 }
 const state = {
+  loadingMore: false,
   loading: true,
   courses: [],
   totalPages: 0,
@@ -29,13 +29,14 @@ const state = {
   page: 1,
   sort: "view",
   pre_page: 20,
-  catgories: [],
+  main_cat: -1,
+  second_cat: -1,
   // list params end
-
   position: undefined,
   scrollTop: 0,
   height: 0,
   back: false,
+  isend: false,
   txt: " ",
   search: false
 };
@@ -46,10 +47,7 @@ const getters = {
   scrollTop: () => state.scrollTop,
   height: () => state.height,
   back: () => state.back,
-  isend: state => {
-    if (state.totalPages === 0) return true;
-    return state.page == state.totalPages;
-  },
+  isend: () => state.isend,
   txt: () => state.txt
 };
 const actions = {
@@ -107,11 +105,10 @@ const mutations = {
     state.courses = [];
     state.isend = false;
   },
-  fetchSelector(state, sort) {
-    state.catgories = sort;
-  },
+  fetchSelector(state, sort) {},
+
   reset(state) {
-    state.page = 1;
+    state.page = 0;
     state.courses = [];
   },
   insertCourses(state, courses) {

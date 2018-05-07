@@ -6,7 +6,7 @@ const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const postcss = require('postcss');
 const dashboard = new Dashboard();
-const px2rem = require('postcss-px2rem');
+// const px2rem = require('postcss-px2rem');
 const csso = require('postcss-csso');
 module.exports = {
     entry: ['whatwg-fetch', path.resolve(__dirname, './src/main.js')],
@@ -43,9 +43,9 @@ module.exports = {
         },
         postcss: function() {
             let arr = [
-                px2rem({
-                    remUnit: 36
-                }),
+                // px2rem({
+                //     remUnit: 36
+                // }),
                 autoprefixer({
                     browsers: ['last 4 versions']
                 }),

@@ -36,8 +36,8 @@ export default function FetchData(url, opt = {}) {
     return response.json().then(json => {
       switch (response.status) {
         case 200:
-          let headers;
           if (opt.responseHeaders && opt.responseHeaders.length) {
+            let headers;
             headers = opt.responseHeaders.map(key => {
               return response.headers.get(key);
             });
@@ -49,6 +49,7 @@ export default function FetchData(url, opt = {}) {
           return json;
         case 201:
           if (opt.responseHeaders && opt.responseHeaders.length) {
+            let headers;
             headers = opt.responseHeaders.map(key => {
               return response.headers.get(key);
             });

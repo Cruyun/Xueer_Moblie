@@ -19,15 +19,15 @@ export default {
   },
   methods: {
     scrollHandler() {
-      const scrollTop = window.pageYOffset;
-      if (scrollTop > 400) {
+      const scrollTop = document.body.scrollTop;
+      if (scrollTop > 10) {
         this.back_to_top = true;
       } else {
         this.back_to_top = false;
       }
     },
     backToTop() {
-      window.scroll(0, 0);
+      document.body.scrollTop = 0;
     }
   },
   directives: {

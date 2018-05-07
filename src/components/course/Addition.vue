@@ -2,7 +2,7 @@
 	<div v-if="false" :class="$style.address">
         <h2 :class="$style.title">课程安排</h2>
         <div :class="$style.course_info">
-            <div  v-for="item in loctime" :class="$style.item_box">
+            <div  v-for="item in loctime" :class="$style.item_box" :key="item.id">
                 <span :class="$style.item">{{ item }}</span>
             </div>
         </div>

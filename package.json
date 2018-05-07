@@ -47,7 +47,6 @@
     "node-sass": "^4.5.2",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "postcss-loader": "^2.0.6",
-    "postcss-px2rem": "^0.3.0",
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
     "sass-loader": "^4.0.0",

@@ -39,6 +39,11 @@ module.exports = new VueRouter({
       component: Detail
     },
     {
+      name: "newComment",
+      path: "/course/:id/comment",
+      component: NewComment
+    },
+    {
       name: "landing",
       path: "/landing",
       component: Landing

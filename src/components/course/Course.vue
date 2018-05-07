@@ -1,11 +1,10 @@
 <template>
 	<div v-scroll="scrollHandler">
-		<selector v-if="is_selected" :catgories="catgories"></selector>
+		<selector v-if="is_selected"></selector>
 		<reSort></reSort>
     <courseList></courseList>
 		<div v-if='isend' :class="$style.hint">(￣▽￣") 已经是全部的结果啦</div>
-		<div v-else :class="$style.hint">(￣▽￣") 加载中</div>
-    <backToTop></backToTop>
+		<div v-if="loadingMore">(￣▽￣") 加载中</div>
 	</div>
 </template>
 
@@ -16,7 +15,6 @@ import Selector from "./Selector.vue";
 import ReSort from "./ReSort.vue";
 import CourseList from "./CourseList.vue";
 import scroll from "../../directives/scroll.js";
-import BackToTop from "../common/BackToTop.vue";
 
 export default {
   data() {
@@ -35,7 +33,7 @@ export default {
     ...mapGetters(["isend", "fetch_flag", "is_search", "is_recommend"]),
     ...mapState({
       page: state => state.courselist.page,
-      catgories: state => state.courselist.catgories
+      loadingMore: state => state.courselist.loadingMore
     }),
     ...mapState(["is_selected", "fetch_flag"])
   },
@@ -75,8 +73,7 @@ export default {
   components: {
     Selector,
     ReSort,
-    CourseList,
-    BackToTop
+    CourseList
   },
   beforeRouteLeave(to, from, next) {
     // this.getPosition(document.body.scrollTop);
