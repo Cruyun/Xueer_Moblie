@@ -6,7 +6,6 @@ const state = {
   comments: [],
   hot_comments: [],
   page: 1,
-  more: true,
   course_id: ""
 };
 const getters = {
@@ -46,6 +45,7 @@ const preprocess = json => {
 
 const actions = {
   fetchAll({ commit }, id) {
+    commit("initAll");
     commit("setId", id);
     Promise.all([
       DetailService.getInfo(state.course_id),
@@ -60,25 +60,40 @@ const actions = {
     });
   },
   fetchMoreComments({ commit }) {
-    state.page++;
+    commit("addPage");
     DetailService.getComments(state.course_id, state.page).then(json => {
       preprocess(json);
-      commit("setComments", json);
+      commit("setMoreComments", json);
     });
-  }
+  },
+  courseLike({ commit }) {}
 };
 const mutations = {
+  initAll(state) {
+    state.info = {};
+    state.hot_tags = [];
+    state.comments = [];
+    state.hot_comments = [];
+    state.page = 1;
+    state.course_id = "";
+  },
   setId(state, id) {
     state.course_id = id;
   },
   setInfo(state, info) {
     state.info = info;
   },
-  setComments(state, comments) {
+  addPage(state) {
+    state.page++;
+  },
+  setMoreComments(state, comments) {
     state.comments = state.comments.concat(comments);
   },
+  setComments(state, comments) {
+    state.comments = comments;
+  },
   setHotComments(state, hot_comments) {
-    state.hot_comments = state.hot_comments.concat(hot_comments);
+    state.hot_comments = hot_comments;
   }
 };
 

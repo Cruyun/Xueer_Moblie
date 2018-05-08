@@ -50,7 +50,9 @@ export default {
     this.changePageFlagN("is_index");
     this.fetchAll(this.$route.params.id);
     this.isLoading(true);
-    document.body.scrollTop = 0;
+  },
+  mounted() {
+    window.scroll(0, 0);
   },
   methods: {
     ...mapActions([

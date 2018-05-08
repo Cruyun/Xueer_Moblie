@@ -30,20 +30,20 @@ export default {
   computed: {
     ...mapGetters(["is_logined", "course_id"])
   },
-  // created() {
-  //   this.fetchInfo(this.id);
-  // },
   methods: {
     ...mapActions(["fetchInfo", "showLogin", "courseLike"]),
     likeCourse() {
-      this.showLogin(true);
-      this.courseLike();
+      if (this.is_logined) {
+        this.courseLike();
+      } else {
+        this.showLogin(true);
+      }
     },
     writeComment() {
       if (this.is_logined) {
-        this.$router.push({path: `/course/${this.info.id}/comment`});
+        this.$router.push({ path: `/course/${this.info.id}/comment` });
       } else {
-        this.showLogin(true)
+        this.showLogin(true);
       }
     }
   }

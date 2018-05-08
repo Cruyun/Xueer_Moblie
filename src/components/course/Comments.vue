@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 /* eslint no-underscore-dangle:0 */
 export default {
   data() {
@@ -45,6 +45,9 @@ export default {
     };
   },
   props: ["comments"],
+  computed: {
+    ...mapGetters(["is_logined", "course_id"])
+  },
   methods: {
     ...mapActions(["showLogin", "commentsLike"]),
     showMore(item) {
@@ -57,8 +60,12 @@ export default {
       item.body = item._body;
     },
     likeComments(e) {
-      e.target.className += " liked";
-      this.commentsLike();
+      if (this.is_logined) {
+        e.target.className += " liked";
+        this.commentsLike();
+      } else {
+        this.showLogin(true);
+      }
     }
   }
 };
