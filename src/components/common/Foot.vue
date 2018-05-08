@@ -20,7 +20,7 @@
   color: #999;
 }
 .title {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   padding: 16px 0 18px;
 }
 .row {
@@ -31,7 +31,7 @@
 }
 .copyright,
 .item {
-  font-size: 24px; /*px*/
+  font-size: 12px; /*px*/
 }
 .item {
   display: inline-block;

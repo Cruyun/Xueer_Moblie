@@ -91,8 +91,8 @@ export default {
   padding: 22px 28px 1px 34px;
 }
 .tags_item {
-  font-size: 28px; /*px*/
-  border-radius: 4px; /*px*/
+  font-size: 14px; /*px*/
+  border-radius: 2px; /*px*/
   display: inline-block;
   line-height: 14px;
   background-color: #cdcdcd;
@@ -106,7 +106,7 @@ export default {
   margin: 0 auto;
 }
 .comments_title {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   padding: 0 0 16px;
   color: #666;
   border-bottom: 2px solid #ececec; /*px*/
@@ -117,12 +117,12 @@ export default {
   text-align: center;
   width: 156px;
   line-height: 38px;
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   color: $_yellow;
   margin: 17px auto;
 }
 .no_more_comments {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: #999;
   width: 120px;
   margin: 0 auto;
@@ -130,7 +130,7 @@ export default {
 }
 .no_comments {
   padding-top: 15px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   text-align: center;
   color: #999;
 }

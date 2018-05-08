@@ -37,8 +37,8 @@ export default {
   padding: 22px 28px 1px 34px;
 }
 .tags_item {
-  font-size: 28px; /*px*/
-  border-radius: 4px; /*px*/
+  font-size: 14px; /*px*/
+  border-radius: 2px; /*px*/
   display: inline-block;
   line-height: 14px;
   background-color: #cdcdcd;

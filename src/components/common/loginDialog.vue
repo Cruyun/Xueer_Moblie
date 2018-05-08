@@ -61,7 +61,7 @@ export default {
   background-repeat: no-repeat;
 }
 .dialog_text {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: #999;
   text-align: center;
   padding-top: 10px;
@@ -73,7 +73,7 @@ export default {
   background-color: #2bbb8f;
 }
 .dialog_btn {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   margin: 3px 0;
   line-height: 36px;
   display: inline-block;

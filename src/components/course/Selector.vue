@@ -86,13 +86,13 @@ export default {
 }
 .tag {
   background: #f3f3f3;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: #666666;
 }
 .bt {
   margin-top: 20px;
   box-sizing: border-box;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: #eeab5d;
   border: 1px solid currentColor;
 }

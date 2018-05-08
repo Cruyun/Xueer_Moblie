@@ -93,15 +93,15 @@ export default {
 }
 .name,
 .time {
-  font-size: 20px; /*px*/
+  font-size: 12px; /*px*/
   line-height: 16px;
   color: $shallow_grey;
 }
 .body {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
 }
 .like {
-  font-size: 24px; /*px*/
+  font-size: 12px; /*px*/
   color: $shallow_grey;
   margin-top: 16px;
   text-align: right;
@@ -136,7 +136,7 @@ export default {
   transform: rotate(180deg);
 }
 .more_text {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: $shallow_grey;
 }
 .like_bt {
@@ -148,7 +148,7 @@ export default {
   text-align: center;
   height: 30px;
   line-height: 30px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   position: absolute;
   color: #ec6941;
   opacity: 0;

@@ -85,7 +85,7 @@ export default {
   display: block;
   width: 100%;
   height: 98px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   box-sizing: border-box;
   padding: 17px 18px;
   background: rgba(216, 216, 216, 0.25);
@@ -113,7 +113,7 @@ export default {
   float: left;
 }
 .pre_tags_item {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
 }
 .input_box {
   overflow: hidden;
@@ -121,7 +121,7 @@ export default {
 .tag_input {
   padding-left: 0.5em;
   line-height: 14px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   width: 100%;
 }
 .btns {
@@ -137,7 +137,7 @@ export default {
   box-sizing: border-box;
   border: 1px solid $_yellow;
   border-radius: 2px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
 }
 .btn_left {
   color: $_yellow;

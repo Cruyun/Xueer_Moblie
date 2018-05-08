@@ -51,12 +51,12 @@ export default {
 @import "../../assets/value.scss";
 
 .object {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   font-weight: 300;
   padding: 0 16px;
 }
 .title {
-  font-size: 40px; /*px*/
+  font-size: 20px; /*px*/
   line-height: 28px;
   padding: 14px 0 16px;
   border-bottom: 1px solid $shallow_silver;
@@ -67,7 +67,7 @@ export default {
   padding: 10px 0;
 }
 .info {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   line-height: 14px;
   color: $shallow_grey;
   display: inline-block;
@@ -80,7 +80,7 @@ export default {
   text-align: right;
 }
 .cont {
-  line-height: 36px; /*px*/
+  line-height: 18px; /*px*/
 }
 .cont p {
   margin: 15px 0;

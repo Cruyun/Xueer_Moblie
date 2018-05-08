@@ -78,7 +78,7 @@ export default {
   border-bottom: 2px solid #ececec; /*px*/
 }
 .avatar {
-  font-size: 40px; /*px*/
+  font-size: 20px; /*px*/
   margin-right: 16px;
   width: 40px;
   height: 40px;
@@ -98,7 +98,7 @@ export default {
   width: 277px;
 }
 .title {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   width: 100%;
   color: #333;
   padding-bottom: 12px;
@@ -114,7 +114,7 @@ export default {
   margin-right: 100px;
 }
 .va_item {
-  font-size: 24px; /*px*/
+  font-size: 12px; /*px*/
   display: inline-block;
   vertical-align: top;
 }

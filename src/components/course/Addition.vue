@@ -24,7 +24,7 @@ export default {
 }
 .title {
   height: 36px;
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   color: #666;
   line-height: 16px;
   box-sizing: border-box;
@@ -42,7 +42,7 @@ export default {
   display: inline-block;
   padding: 0 2px;
   color: #fff;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   line-height: 20px;
   background: #60b9a6;
   border-radius: 2px;

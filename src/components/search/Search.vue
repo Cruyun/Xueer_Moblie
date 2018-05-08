@@ -9,7 +9,7 @@
 				<div :class="$style.hot">
 					<p :class="$style.title">大家都在搜</p>
 					<div :class="[$style.items, $style.space]">
-						<span @click="searchHot(e, item)" v-for='item in hot' :data-link="link" :class="$style.item">
+						<span @click="searchHot(e, item)" v-for='item in hot' :data-link="link" :class="$style.item" :key="item.id">
 							{{ item }}
 						</span>
 					</div>
@@ -131,7 +131,7 @@ export default {
   padding-top: 16px;
 }
 .search_input {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   display: inline-block;
   line-height: 34px;
   width: 215px;
@@ -144,7 +144,7 @@ export default {
   color: #333;
 }
 .search_btn {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   border-radius: 0 4px 4px 0; /*px*/
   display: inline-block;
   background-color: #eeab5d;
@@ -154,7 +154,7 @@ export default {
   color: #fff;
 }
 .title {
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   padding: 14px 0;
   color: #999;
 }
@@ -162,7 +162,7 @@ export default {
   font-size: 0;
 }
 .item {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   border-radius: 4px; /*px*/
   display: inline-block;
   line-height: 20px;

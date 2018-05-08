@@ -82,12 +82,12 @@ export default {
   height: 100%;
 }
 .title {
-  font-size: 40px; /*px*/
+  font-size: 20px; /*px*/
   line-height: 28px;
   padding: 0 31px;
 }
 .teacher {
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   line-height: 24px;
   padding: 16px 31px 7px;
 }
@@ -123,7 +123,7 @@ export default {
   display: inline-block;
   min-width: 48px;
   text-align: center;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
 }
 // .heart_icon,
 // .heart_icon_filled {

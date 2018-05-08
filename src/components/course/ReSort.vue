@@ -76,7 +76,7 @@ export default {
 }
 .s_item {
   vertical-align: middle;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
 }
 .comment {
   border-right: 2px solid #666; /*px*/

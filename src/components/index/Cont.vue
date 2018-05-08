@@ -71,7 +71,6 @@ export default {
 .title {
   padding: 0 16px;
   font-size: 20px;
-  //font-size: 40px;
   line-height: 28px;
   margin-top: 16px;
   color: $shallow_black;
@@ -94,12 +93,12 @@ export default {
   margin-right: 11px;
 }
 .icon_views {
-  width: 40px; /*px*/
-  height: 20px; /*px*/
+  width: 20px;
+  height: 20px;
 }
 .icon_likes {
-  width: 30px; /*px*/
-  height: 25px; /*px*/
+  width: 15px;
+  height: 20px;
 }
 .icon_likes use {
   fill: #fff;
@@ -111,7 +110,7 @@ export default {
 }
 .count {
   line-height: 20px;
-  font-size: 24px; /*px*/
+  font-size: 12px; /*px*/
   padding-left: 7px;
 }
 .time {

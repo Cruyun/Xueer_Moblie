@@ -45,7 +45,7 @@ export default {
 }
 .text {
   padding: 17px 0 0 72px;
-  font-size: 28px; /*px*/
+  font-size: 14px; /*px*/
   color: #999999;
   line-height: 1;
 }
@@ -64,7 +64,7 @@ export default {
 }
 .bt_text {
   display: inline-block;
-  font-size: 32px; /*px*/
+  font-size: 16px; /*px*/
   color: #eeab5d;
 }
 @keyframes trans_rorate {

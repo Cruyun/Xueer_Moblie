@@ -96,7 +96,7 @@ export default {
 
 <style lang="scss" module>
 .hint {
-  font-size: 24px; /*px*/
+  font-size: 12px; /*px*/
   text-align: center;
   color: #999;
   margin-top: 16px;
