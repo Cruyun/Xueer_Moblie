@@ -2,7 +2,7 @@ import Fetch from "./fetch.js";
 
 const DetailService = {
   like(id, body, token) {
-    return Fetch("/api/v1.0/" + id +"/courses/like/", {
+    return Fetch("/api/v1.0/" + id + "/courses/like/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -12,16 +12,35 @@ const DetailService = {
       data: body
     });
   },
-  getInfo(id) {
-    return Fetch("/api/v1.0/courses/" + id + "/");
+  getInfo(id, token) {
+    return Fetch("/api/v1.0/courses/" + id + "/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
+      }
+    });
   },
-  getComments(id, page) {
+  getComments(id, page, token) {
     return Fetch(
-      "/api/v1.0/courses/" + id + "/comments/?page=" + page + "&per_page=10"
+      "/api/v1.0/courses/" + id + "/comments/?page=" + page + "&per_page=10",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(token + ":")
+        }
+      }
     );
   },
-  getHotComments(id) {
-    return Fetch("/api/v1.0/courses/" + id + "/comments/hot/");
+  getHotComments(id, token) {
+    return Fetch("/api/v1.0/courses/" + id + "/comments/hot/", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
+      }
+    });
   },
   likeCourse(id, token) {
     return Fetch("/api/v1.0/courses/" + id + "/like/", {
@@ -54,7 +73,27 @@ const DetailService = {
       data: {
         body: text
       }
-    })
+    });
+  },
+  DelLikeCourse(id, token) {
+    return Fetch("/api/v1.0/courses/" + id + "/like/", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
+      }
+    });
+  },
+  DelLikeComment(id, token) {
+    return Fetch("/api/v1.0/comments/" + id + "/like/", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
+      }
+    });
   }
 };
 

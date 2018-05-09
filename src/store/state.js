@@ -10,9 +10,11 @@ const state = {
   is_loading: false,
   is_selected: false,
   show_login: false,
-  is_logined: false,
+  // is_logined: false,
+  is_logined: true,
   fetch_flag: true,
-  token: "",
+  // token: "",
+  token: "eyJpZCI6NDIxfQ.ZEqtUJ7lxoZBKgOrEVUWWcHJSXU",
   currentRoute: ""
 };
 

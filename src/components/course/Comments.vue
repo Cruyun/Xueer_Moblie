@@ -1,6 +1,6 @@
 <template>
 	<div :class="$style.comments">
-		<li v-for="item in comments" :class="$style.comment_item" :key="item.id">
+		<li v-for="(item, index) in comments" :class="$style.comment_item" :key="item.id">
 	        <div :class="$style.space">
 	            <div :class="$style.avatar">
 					<img src="http://xueer.muxixyz.com/static/x_m/avatar.png">
@@ -11,15 +11,15 @@
 	                <div :class="$style.body">{{ item.body }}</div>
 	                <div :class="$style.like">
 	                    <div :class="$style.touch_area">
-							<div :id="item.likes" @click="likeComments" :class="$style.like_bt">
-								<div :class="$style.like_anim">+1</div>
-								<svg :class="$style.like_icon">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
-								</svg>
-							</div>
-	                        <span :class="$style.like_count">{{ item.likes }}</span>
+                        <div :id="item.likes" @click="likeComments(item, index, $event)" :class="[$style.like_bt]">
+                          <div :class="[$style.like_anim, item.liked ? $style.liked : '']">+1</div>
+                          <svg :class="[$style.like_icon]">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
+                          </svg>
+                        </div>
+	                      <span :class="$style.like_count">{{ item.likes }}</span>
 	                    </div>
-					</div>
+					        </div>
 	            </div>
 	            <div v-if="item._body" @click="showMore(item)" :class="$style.more">
 	                <svg :class="[item.body == item._body ? [$style.icon_up] : '', $style.more_icon]">
@@ -49,7 +49,7 @@ export default {
     ...mapGetters(["is_logined", "course_id"])
   },
   methods: {
-    ...mapActions(["showLogin", "commentsLike"]),
+    ...mapActions(["showLogin", "commentsLike", "commentsDisLike"]),
     showMore(item) {
       this.more = !this.more;
       if (!this.more) {
@@ -59,10 +59,17 @@ export default {
       this.body = item.body;
       item.body = item._body;
     },
-    likeComments(e) {
+    likeComments(item, index, e) {
       if (this.is_logined) {
-        e.target.className += " liked";
-        this.commentsLike();
+        let id = item.id;
+        if (!item.liked) {
+          // console.log("喜欢");
+          // e.target.className += " liked";
+          this.commentsLike({ id, index });
+        } else {
+          //console.log("不喜欢");
+          this.commentsDisLike({ id, index });
+        }
       } else {
         this.showLogin(true);
       }
@@ -73,6 +80,7 @@ export default {
 
 <style lang='scss' module>
 @import "../../assets/value.scss";
+@import "../../assets/common.scss";
 
 .comment_item {
   font-size: 0;

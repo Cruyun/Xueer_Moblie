@@ -4,10 +4,10 @@
 		<div :class="$style.teacher">{{ info.teacher }}</div>
 		<div :class="$style.btns">
 			<div @click="likeCourse" :class="$style.btn" :id="info.id">
-				<svg viewBox="0 0 17 15" :class="[$style.icon, $style.heart_icon_filled]">
+				<svg viewBox="0 0 17 15" :class="[$style.icon, info.liked ? $style.heart_icon_filled : $style.heart_icon_out]">
 					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
 				</svg>
-				<svg viewBox="0 0 17 15" :class="[$style.icon, $style.heart_icon]">
+				<svg viewBox="0 0 17 15" :class="[$style.icon]">
 					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_s"></use>
 				</svg>
 				<span :class="$style.btn_text">{{ info.likes }}</span>
@@ -31,10 +31,16 @@ export default {
     ...mapGetters(["is_logined", "course_id"])
   },
   methods: {
-    ...mapActions(["fetchInfo", "showLogin", "courseLike"]),
+    ...mapActions(["fetchInfo", "showLogin", "courseLike", "courseDisLike"]),
     likeCourse() {
       if (this.is_logined) {
-        this.courseLike();
+        if (this.info.liked) {
+          // 已经点赞，现在来取消
+          this.courseDisLike();
+        } else {
+          // 未点赞，现在来点
+          this.courseLike();
+        }
       } else {
         this.showLogin(true);
       }
@@ -133,10 +139,17 @@ export default {
   animation-fill-mode: forwards;
   animation: heart_s ease-in-out 1s;
 }
+.heart_icon_out {
+  position: absolute;
+  fill: #fff;
+  animation-fill-mode: forwards;
+  animation: heart_s ease-out 1s;
+  transform: translateX(-667%);
+}
 .heart_icon_filled {
   position: absolute;
   fill: #fff;
-  animation: heart_f 1s ease-in-out 1s;
+  animation: heart_f ease-in-out 1s;
   animation-fill-mode: forwards;
 }
 @keyframes heart_s {
