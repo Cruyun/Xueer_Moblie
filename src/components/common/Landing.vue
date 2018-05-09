@@ -12,7 +12,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["is_loading", "is_logined", "token"])
+    ...mapState(["is_loading"])
   },
   // components: {
   //   Loading: Loading

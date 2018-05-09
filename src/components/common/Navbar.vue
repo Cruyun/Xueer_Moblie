@@ -53,7 +53,8 @@ export default {
       "is_search",
       "is_auth",
       "is_course",
-      "is_sub"
+      "is_sub",
+      "is_logined"
     ])
   },
   methods: {
@@ -61,7 +62,8 @@ export default {
       "showSearch",
       "changePageFlagN",
       "changePageFlagY",
-      "getSnaps"
+      "getSnaps",
+      "setToken"
     ]),
     backStep() {
       this.$router.go(-1);
@@ -74,9 +76,12 @@ export default {
     },
     toLogin() {
       Cookie.setCookie('url', window.location.href);
-      //window.location = "https://user.muxixyz.com/?http://xueer.muxixyz.com/landing"
-      window.location.href = 
-        "/landing/?email=1045671796%40qq.com&token=eyJhbGciOiJIUzI1NiIsImV4cCI6MTUxNDAzMDQyNywiaWF0IjoxNTE0MDI2ODI3fQ.eyJpZCI6MjY3fQ.bOgABI7EbpNgqhd1IT-6xvRiq4PHrTkZKkYe6zQxnNc";
+      window.location = "https://user.muxixyz.com/?landing=localhost:3000/landing"
+    }
+  },
+  mounted() {
+    if (!this.is_logined && Cookie.getCookie("token")) {
+      this.setToken(Cookie.getCookie("token"));
     }
   }
 };

@@ -1,3 +1,5 @@
+import Cookie from "../service/cookie";
+
 const mutations = {
   changeCurrentRoute(state, path) {
     state.currentRoute = path;
@@ -37,11 +39,14 @@ const mutations = {
   initData(state, data) {
     state[data] = "";
   },
-  getToken(state, token) {
+  setToken(state, token) {
     state.token = token
+    console.log("token", state.token)
+   
   },
   isLogin(state) {
     state.is_logined = true
+    console.log("login",state.is_logined)
   }
 };
 

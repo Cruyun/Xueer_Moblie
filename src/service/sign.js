@@ -8,7 +8,7 @@ let SignService = {
       .split("=")[1];
   },
   getUsername(email) {
-    return Fetch("https://user.muxixyz.com/api/user/?email=" + email, {
+    return Fetch("https://user.muxixyz.com/api/user/?email=" + decodeURIComponent(email), {
       method: "GET"
     });
   },
@@ -18,17 +18,22 @@ let SignService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(email + ":muxi304")
+        Authorization: "Basic " + btoa(decodeURIComponent(email) + ":muxi304")
       }
     });
   },
   register(username, email) {
     return Fetch("/api/v1.0/users/", {
       method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Basic ZXlKcFpDSTZNVEY5LlljM0pTbElmRktPd0tKY3g0QXZwX2Y0bEZvUTo=" // btoa(管理员token)
+      },
       data: {
-        username: username,
-        email: email,
-        password: "muxi304",
+        username: decodeURIComponent(username),
+        email: decodeURIComponent(email),
+        password: "bXV4aTMwNA==", // btoa(muxi304)
         roleid: 3
       }
     });
