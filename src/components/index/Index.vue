@@ -4,9 +4,9 @@
 			<div :class="$style.item">
 				<router-link :class="[$style.active,$style.link]" :to="{ name: 'index', params: { page: 'index' }}">首页</router-link>
 			</div>
-			<div :class="$style.item">
+			<!-- <div :class="$style.item">
 				<router-link :class="$style.link" :to="{ name: 'recommend', params: { page: 'recommend', sort: 'score' }}">推荐课程</router-link>
-			</div>
+			</div> -->
 			<div :class="$style.item">
 				<router-link :class="$style.link" :to="{ name: 'all', params: { page: 'all', sort: 'view' }}">所有课程</router-link>
 			</div>
