@@ -10,11 +10,8 @@ const getters = {
 };
 const actions = {
   preTags({ commit }, val) {
-      // tags是正在输入的标签,用逗号判断是否输入完一个标签
-      const tags = val
-        .split(",")
-        .join("，")
-        .split("，");
+      // tags是正在输入的标签,用空格判断是否输入完一个标签
+      const tags = val.split(" ")
       if (tags.length > 1) {  // 已经输入完一个标签
         commit("addPreTag", tags[0]); // 假如标签列表
         commit("clearTag"); // 清空现在正在输入的标签内容
@@ -50,7 +47,10 @@ const mutations = {
     state.pre_tags.pop();
   },
   clickTag(state, val) {
-    state.pre_tags.push(val);
+    if (state.pre_tags.indexOf(val) == -1) {
+      state.pre_tags.push(val);
+    }
+    console.log("tag ", val);
   }
 };
 export default {

@@ -60,6 +60,7 @@ export default {
       item.body = item._body;
     },
     likeComments(item, index, e) {
+      console.log(this.is_logined)
       if (this.is_logined) {
         let id = item.id;
         if (!item.liked) {

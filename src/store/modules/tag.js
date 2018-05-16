@@ -1,9 +1,11 @@
 import TagService from "../../service/tag";
 const state = {
-  hot_tag: []
+  hot_tag: [],
+  tag_exist: false
 };
 const getters = {
-  hot_tag: () => state.hot_tag
+  hot_tag: () => state.hot_tag,
+  tag_exist: () => state.tag_exist
 };
 const actions = {
   getTags({ commit }) {
@@ -14,11 +16,15 @@ const actions = {
         }
       }
     });
+    commit("existTags")
   }
 };
 const mutations = {
   getTags(state, title) {
-    state.hot_tag.push(title);
+    state.hot_tag.push(title)
+  },
+  existTags(state) {
+    state.tag_exist = true
   }
 };
 export default {

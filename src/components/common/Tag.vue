@@ -1,6 +1,6 @@
 <template>
-	<div @click='addTag' :class='$style.tags'>
-		<span v-for='item in hot_tag' :class='$style.tags_item' :key="item.id">{{ item }}</span>
+	<div :class="$style.tags">
+		<span v-for="item in hot_tag" :class="$style.tags_item" :key="hot_tag.indexOf(item)"  @click="addTag(item)">{{ item }}</span>
 	</div>
 </template>
 <script>
@@ -9,32 +9,28 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      val: ""
+      item: ""
     };
   },
   computed: {
-    ...mapGetters(["hot_tag"])
+    ...mapGetters(["hot_tag", "tag_exist"])
   },
   methods: {
     ...mapActions(["clickTag", "getTags"]),
-    addTag(ev) {
-      if (ev.target.tagName == "SPAN" || "span") {
-        if (this.val == ev.target.textContent) {
-          return;
-        }
-        this.val = ev.target.textContent;
-        this.$store.commit("clickTag", this.val);
-      }
+    addTag(item) {
+      this.$store.commit("clickTag", item);
     }
   },
   created() {
-    this.getTags();
+    if (!this.tag_exist) {
+      this.getTags();
+    }
   }
 };
 </script>
 <style lang='scss' module>
 .tags {
-  padding: 22px 28px 1px 34px;
+  padding: 10px 28px 1px 34px;
 }
 .tags_item {
   font-size: 14px; /*px*/
@@ -45,5 +41,6 @@ export default {
   padding: 3px;
   color: #fff;
   margin-right: 6px;
+  margin-bottom: 6px;
 }
 </style>

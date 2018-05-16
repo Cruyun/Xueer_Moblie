@@ -3,9 +3,9 @@
         <div :class="$style.title">华中师范大学&nbsp;|&nbsp;木犀团队</div>
         <div :class="$style.links">
             <div :class="$style.row">
-                <a href="http://muxistudio.com" :class="$style.item">关于木犀</a>
+                <a href="http://www.muxixyz.com/" :class="$style.item">关于木犀</a>
                 <a href="http://form.mikecrm.com/GFFw2v" :class="$style.item">意见反馈</a>
-                <a href="http://muxistudio.com" :class="$style.item">加入我们</a>
+                <a href="http://cn.mikecrm.com/uBXlK1v" :class="$style.item">加入我们</a>
             </div>
         </div>
         <div :class="$style.copyright">Proudly Prowered by Vue &amp; Flask</div>

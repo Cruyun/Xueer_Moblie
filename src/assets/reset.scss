@@ -22,6 +22,7 @@ h2 {
 a {
   text-decoration: none;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 img {
   width: 100%;
@@ -39,6 +40,7 @@ input,
 button,
 textarea {
   outline: none;
+  border: none;
 }
 
 // filter
