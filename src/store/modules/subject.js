@@ -1,31 +1,24 @@
 import SubjectService from "../../service/subject";
 
 const state = {
-  sub_info: {},
-  subject_id: ""
+  sub_info: {}
 };
 const getters = {
-  sub_info: () => state.sub_info,
-  subject_id: () => state.subject_id
+  sub_info: () => state.sub_info
 };
 const actions = {
   fetchSubject({ commit }, id) {
-    commit("fetchSubject", id);
+    SubjectService.oneTip(id).then(json => {
+      commit("fetchSubject", json);
+    });
   },
   likeThis({ commit }) {
     commit("likeThis");
   }
 };
 const mutations = {
-  fetchSubject(state, id) {
-    state.subject_id = id;
-    /* const url = '/api/v1.0/tips/' + id + '/'
-		fetch(url).then(response => {
-			response.json() */
-    SubjectService.oneTip.then(json => {
-      state.sub_info = json;
-    });
-    return true;
+  fetchSubject(state, json) {
+    state.sub_info = json;
   }
 };
 export default {

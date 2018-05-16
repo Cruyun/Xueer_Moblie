@@ -50,7 +50,6 @@ const mutations = {
     if (state.pre_tags.indexOf(val) == -1) {
       state.pre_tags.push(val);
     }
-    console.log("tag ", val);
   }
 };
 export default {
