@@ -7,14 +7,14 @@
 					<div :class="$style.content">
 						<div :class="[$style.title, $style.c_link]">{{ item.title }}</div>
 						<div :class="[$style.info, $style.space]">
-							<span :class="[$style.va_item, $style.teacher]">{{ item.teacher }}</span>
-							<span :class="[$style.va_item, $style.comments]">
+							<span :class="[$style.teacher]">{{ item.teacher }}</span>
+							<span :class="[$style.comments, $style.flex]">
 								<svg :class="$style.logo">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comments_fill"></use>
 								</svg>
 								<span>{{ item.views }}</span>
 							</span>
-							<span :class="[$style.va_item, $style.likes]">
+							<span :class="[$style.likes, $style.flex]">
 								<svg :class="$style.logo">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
 								</svg>
@@ -67,6 +67,9 @@ export default {
 </script>
 
 <style lang='scss' module>
+.flex {
+  display: flex;
+}
 .list {
   width: 100%;
 }
@@ -106,11 +109,12 @@ export default {
 .info {
   width: 100%;
   color: #999;
+  display: flex;
+  font-size: 12px; /*px*/
+  align-items: center;
 }
 .teacher {
   width: 72px;
-  height: 12px;
-  overflow: hidden;
   margin-right: 100px;
 }
 .va_item {

@@ -34,7 +34,6 @@ export default {
 
 .home {
   font-family: "STHeiti";
-  height: 100%;
 }
 
 .tabs {

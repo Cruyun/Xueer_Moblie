@@ -23,6 +23,7 @@ function getQueryParams(state) {
 }
 const state = {
   loading: true,
+  loadingMore: false,
   courses: [],
   totalPages: 0,
   // list params
@@ -71,11 +72,11 @@ const actions = {
   },
   // 分页加载课程列表，下一页
   fetchNextCoursesList({ commit, state }) {
-    commit("beforeFetchNextCoursesList");
+    commit("setLoadingMore", true);
     commit("setPage", state.page + 1);
     CourseListService.getNextCoursesList(getQueryParams(state)).then(res => {
       commit("insertCourses", res);
-      commit("afterFetchNextCoursesList");
+      commit("setLoadingMore", false);
     });
   },
   changeSortMethod({ commit }, method) {
@@ -126,13 +127,9 @@ const mutations = {
   setSort(state, sort) {
     state.sort = sort;
   },
-  beforeFetchNextCoursesList(state) {
-    state.loadingMore = true;
+  setLoadingMore(state, loading) {
+    state.loadingMore = loading;
   },
-  afterFetchNextCoursesList(state) {
-    state.loadingMore = false;
-  },
-
   getPosition(state, position) {
     state.position = position;
   },
