@@ -30,19 +30,19 @@ const actions = {
     let email = SignService.getEmail();
     SignService.getToken(email).then(res => {
       if (res !== null && res !== undefined){
-        Cookie.setCookie("token", res.token)
+        Cookie.setCookie("token", res.token, 365)
         commit("isLoading", false);
         window.location.href = Cookie.getCookie("url");
       } else {
         SignService.getUsername(email).then(info => {
           SignService.register(info.username, email).then(res => {
             SignService.getToken(email).then(res => {
-              Cookie.setCookie("token", res.token)
+              Cookie.setCookie("token", res.token, 365)
               commit("isLoading", false);
               window.location.href = Cookie.getCookie("url");
             })
           })
-        })  
+        })
       }
     })
   },
