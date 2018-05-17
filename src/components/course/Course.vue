@@ -1,8 +1,8 @@
 <template>
 	<div v-scroll="scrollHandler">
-		<selector v-if="is_selected" :catgories="catgories"></selector>
-		<reSort></reSort>
-    <courseList></courseList>
+		<selector @fetchAgain="fetchCoursesList" v-if="is_selected" :catgories="catgories"></selector>
+		<reSort @fetchAgain="fetchCoursesList"></reSort>
+    <courseList :courses="courses"></courseList>
 		<div v-if='isend' :class="$style.hint">(￣▽￣") 已经是全部的结果啦</div>
 		<div v-else :class="$style.hint">(￣▽￣") 加载中</div>
     <backToTop></backToTop>
@@ -32,7 +32,13 @@ export default {
     this.fetchCoursesList();
   },
   computed: {
-    ...mapGetters(["isend", "fetch_flag", "is_search", "is_recommend"]),
+    ...mapGetters([
+      "courses",
+      "isend",
+      "fetch_flag",
+      "is_search",
+      "is_recommend"
+    ]),
     ...mapState({
       loadingMore: state => state.courselist.loadingMore,
       page: state => state.courselist.page,

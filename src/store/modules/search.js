@@ -1,20 +1,66 @@
 import SearchService from "../../service/search";
-
+const MAIN_CAT_MAP = {
+  0: "null",
+  1: "gg_cat",
+  2: "ts_cat",
+  3: "zy_cat",
+  4: "sz_cat"
+};
+//创建一个方法，返回value值对应的key
+function findKey(obj, value, compare = (a, b) => a === b) {
+  return Object.keys(obj).find(k => compare(obj[k], value));
+}
+// params hepler
+function getQueryParams(state) {
+  let mainCatKey;
+  let obj = {
+    keywords: state.key_word,
+    page: state.search_page,
+    sort: state.sort,
+    per_page: 20,
+    main_cat: state.main_cat
+  };
+  return obj;
+}
 const state = {
   hot: [],
   show_search: false,
   result: [],
+  sort: "view",
   search_page: 1,
-  key_word: ""
+  key_word: "",
+  total_search_pages: 0,
+  main_cat: 0
 };
 const getters = {
   hot: () => state.hot,
   result: () => state.result,
-  show_search: () => state.show_search
+  show_search: () => state.show_search,
+  search_end: state => {
+    if (state.total_search_pages === 0) {
+      return true;
+    }
+    return state.search_page == state.total_search_pages;
+  }
 };
 const actions = {
+  // initSearchParam({ commit }, option) {
+  //   console.log("init")
+  //   if (!option) {
+  //     option = {}
+  //   }
+  //   if (option.key_word) {
+  //     commit("setKeyWord", option.key_word);
+  //   }
+  //   if (option.sort) {
+  //     commit("setSort", option.sort);
+  //   }
+  //   state.search_page = 1;
+  // },
   fetchHot({ commit }) {
-    commit("fetchHot");
+    SearchService.getHot().then(json => {
+      commit("fetchHot", json);
+    });
   },
   showSearch({ commit }) {
     commit("showSearch");
@@ -22,21 +68,54 @@ const actions = {
   hideSearch({ commit }) {
     commit("hideSearch");
   },
-  searchCourse({ commit }, info) {
-    commit("searchCourse", info);
+  searchCourse({ commit }, option) {
+    if (!option) {
+      option = {};
+    }
+    if (option.key_word) {
+      commit("setKeyWord", option.key_word);
+    }
+    if (option.sort) {
+      commit("setSort", option.sort);
+    }
+    if (option.main_cat) {
+      let index = findKey(MAIN_CAT_MAP, option.main_cat);
+      commit("setMainCat", index);
+    }
+    commit("initPage");
+    let param = getQueryParams(state);
+    SearchService.searchCourse(param).then(({ json, headers }) => {
+      let totalPages = Number(
+        /page=([0-9]+)/.exec(headers[0].split(";")[1])[1]
+      );
+      commit("initResult");
+      commit("insertResult", json);
+      commit("settotalPages", totalPages);
+    });
   },
-  searchResScroll({ commit }) {
-    commit("searchResScroll");
+  searchNextCourse({ commit }) {
+    commit("searchPageAdd");
+    let param = getQueryParams(state);
+    SearchService.searchCourse(param).then(({ json, headers }) => {
+      commit("insertResult", json);
+    });
   }
 };
 const mutations = {
-  fetchHot(state) {
-    SearchService.getHot()
-      /* fetch('/api/v1.0/search/hot/').then(response => {
-			response.json() */
-      .then(json => {
-        state.hot = json;
-      });
+  setKeyWord(state, key_word) {
+    state.key_word = key_word;
+  },
+  setSort(state, sort) {
+    state.sort = sort;
+  },
+  initPage(state) {
+    state.search_page = 1;
+  },
+  setMainCat(state, main_cat) {
+    state.main_cat = main_cat;
+  },
+  fetchHot(state, json) {
+    state.hot = json;
   },
   showSearch(state) {
     state.show_search = true;
@@ -44,23 +123,17 @@ const mutations = {
   hideSearch(state) {
     state.show_search = false;
   },
-  searchCourse(state, info) {
-    state.key_word = info;
-    /* const url = '/api/v1.0/search/?page=1&per_page=20&keywords=' + info
-		return fetch(url).then(response => {
-			response.json() */
-    SearchService.searchCourse().then(json => {
-      state.result = json;
-    });
+  initResult(state) {
+    state.result = [];
   },
-  searchResScroll(state) {
-    state.search_page += 1;
-    /* const url = '/api/v1.0/search/?page=' + state.search_page + '&per_page=20&keywords=' + state.key_word
-		return fetch(url).then(response => {
-			response.json() */
-    SearchService.searchRes(state.search_page, state.key_word).then(json => {
-      state.result = state.result.concat(json);
-    });
+  insertResult(state, json) {
+    state.result = state.result.concat(json);
+  },
+  settotalPages(state, totalPages) {
+    state.total_search_pages = totalPages;
+  },
+  searchPageAdd(state) {
+    state.search_page++;
   }
 };
 export default {

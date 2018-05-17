@@ -39,26 +39,11 @@ export default {
       is_recommend: false
     };
   },
-  computed: {
-    ...mapGetters(["courses", "position", "back", "page", "txt", "isend"]),
-    ...mapState([
-      "is_loading",
-      "page_snaps",
-      "is_selected",
-      "fetch_flag",
-      "is_search"
-    ])
-  },
-  methods: {
-    ...mapActions([
-      "getPosition",
-      "turnFlag",
-      "changePageFlagN",
-      "changePageFlagY",
-      "initCourse",
-      "isLoading"
-    ])
-  },
+  // computed: {
+  //   ...mapGetters(["courses"])
+  // },
+  props: ["courses"],
+  methods: {},
   filters: {
     subStr
   },

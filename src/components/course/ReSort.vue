@@ -43,7 +43,8 @@ export default {
     ]),
     reSort(method) {
       this.changeSortMethod(method);
-      this.fetchCoursesList();
+      // this.fetchCoursesList();
+      this.$emit("fetchAgain");
     },
     Selector() {
       this.showSelector(!this.is_selected);

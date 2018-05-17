@@ -16,6 +16,8 @@
 					</svg>
 					<span v-if="currentRoute === 'all'" :class="[$style.title_l, $style.title]">所有课程</span>
         	<span v-if="currentRoute === 'course'" :class="[$style.title_l, $style.title]">课程详情</span>
+          <span v-if="currentRoute === 'recommend'" :class="[$style.title_l, $style.title]">推荐课程</span>
+          <span v-if="currentRoute === 'search'" :class="[$style.title_l, $style.title]">搜索结果</span>
 					<!-- <span v-if="is_search_res" :class="[$style.title_l, $style.title]">搜索结果</span>
 					<span v-if="is_recommend" :class="[$style.title_l, $style.title]">推荐课程</span>
 					<span v-if="is_auth" :class="[$style.title_l, $style.title]">我的学而</span>
@@ -75,8 +77,9 @@ export default {
       // this.changePageFlagN(['is_all','is_auth','is_recommend','is_sub'])
     },
     toLogin() {
-      Cookie.setCookie('url', window.location.href);
-      window.location = "https://user.muxixyz.com/?landing=localhost:3000/landing"
+      Cookie.setCookie("url", window.location.href);
+      window.location =
+        "https://user.muxixyz.com/?landing=localhost:3000/landing";
     }
   },
   mounted() {

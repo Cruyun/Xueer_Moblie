@@ -52,7 +52,7 @@ export default {
       //   this.initCourse();
       // }
       this.fetchSelector(this.selected);
-      this.fetchCoursesList();
+      this.$emit("fetchAgain");
       this.is_selected
         ? (document.body.className = "no_scroll")
         : (document.body.className = "");

@@ -9,7 +9,7 @@
 				<div :class="$style.hot">
 					<p :class="$style.title">大家都在搜</p>
 					<div :class="[$style.items, $style.space]">
-						<span @click="searchHot(e, item)" v-for='item in hot' :data-link="link" :class="$style.item" :key="item.id">
+						<span @click="searchHot(item)" v-for='item in hot' :data-link="link" :class="$style.item" :key="item.id">
 							{{ item }}
 						</span>
 					</div>
@@ -33,14 +33,24 @@ export default {
     this.fetchHot();
   },
   computed: {
-    ...mapGetters(["hot", "show_search", "snaps", "result", "txt"]),
+    ...mapGetters([
+      "hot",
+      "show_search",
+      "snaps",
+      "result",
+      "is_search",
+      "result"
+    ]),
     ...mapState(["page_snaps", "search_page"]),
+    ...mapState({
+      catgories: state => state.courselist.catgories
+    }),
     link() {
       return "search/?page=1&per_page=20&keywords=" + this.hot;
     }
   },
   watch: {
-    txt() {
+    result() {
       this.isLoading(false);
       this.hiddenSearch();
     }
@@ -53,7 +63,7 @@ export default {
       "changePageFlagY",
       "searchCourse",
       "isLoading",
-      "initCourse"
+      "initSearchParam"
     ]),
     hiddenSearch() {
       this.hideSearch();
@@ -67,23 +77,29 @@ export default {
       }
     },
     search() {
-      const info = encodeURIComponent(this.info);
-      if (info == this.txt || !this.info) {
-        this.hiddenSearch();
+      const info = this.info;
+      if (!this.info) {
         return;
       }
+      this.hiddenSearch();
       this.isLoading(true);
+      let main_cat;
+      if (this.catgories.length) {
+        main_cat = this.catgories[0];
+      } else {
+        main_cat = "null";
+      }
       const option = {
-        info: info,
-        search: true
+        key_word: info,
+        main_cat: main_cat
       };
-      this.initCourse(option);
+      // this.initSearchParam(option);
+      this.searchCourse(option);
       this.$router.push({
-        name: "all",
-        params: { page: "all", txt: this.txt }
+        name: "search"
       });
     },
-    searchHot(e, item) {
+    searchHot(item) {
       this.info = item;
       this.search();
     }

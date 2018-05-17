@@ -14,20 +14,35 @@ import scroll from "../../directives/scroll";
 export default {
   data() {
     return {
-      back_to_top: false
+      back_to_top: false,
+      step: 10
     };
   },
   methods: {
     scrollHandler() {
       const scrollTop = window.pageYOffset;
-      if (scrollTop > 400) {
+      if (!this.back_to_top && scrollTop > 400) {
         this.back_to_top = true;
-      } else {
+      }
+      if (this.back_to_top && scrollTop < 400) {
         this.back_to_top = false;
       }
     },
     backToTop() {
-      window.scroll(0, 0);
+      window.smoothscroll = () => {
+        let currentScroll =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+          window.requestAnimationFrame(window.smoothscroll);
+          window.scrollTo(
+            0,
+            Math.floor(currentScroll - currentScroll / this.step)
+          );
+        } else {
+          return;
+        }
+      };
+      window.smoothscroll();
     }
   },
   directives: {
