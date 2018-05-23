@@ -1,10 +1,10 @@
 <template>
 	<div :class="$style.detail">
-		<info :info='info'></info>
+		<info :info='info'/>
 		<div :class="$style.tags">
 			<span v-for="item in hot_tags" :class="$style.tags_item" :key="item.id">{{ item }}</span>
 		</div>
-		<addition></addition>
+		<addition/>
 		<div v-if="hot_comments.length != 0" :class="$style.comments">
 			<h2 :class="$style.comments_title">热门评论</h2>
 			<comment :comments="hot_comments"></comment>
@@ -19,16 +19,18 @@
 			</div>
 		</div>
 		<div v-if="comments.length == 0" :class="$style.no_comments">∑(っ °Д °;)っ<br>没有任何评价，快去添加第一条评价吧。</div>
-		<backToTop></backToTop>
+		<backToTop/>
+    <loading v-show="loading"/>
 	</div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 import Comment from "./Comments.vue";
 import Info from "./Info.vue";
 import BackToTop from "../common/BackToTop.vue";
 import Addition from "./Addition.vue";
+import Loading from "../common/Loading.vue";
 
 export default {
   data() {
@@ -37,6 +39,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      loading: state => state.detail.loading
+    }),
     ...mapGetters([
       "info",
       "hot_tags",
@@ -47,21 +52,13 @@ export default {
     ])
   },
   created() {
-    this.changePageFlagN("is_index");
     this.fetchAll(this.$route.params.id);
-    this.isLoading(true);
   },
   mounted() {
     window.scroll(0, 0);
   },
   methods: {
-    ...mapActions([
-      "fetchAll",
-      "fetchMoreComments",
-      "turnFlag",
-      "isLoading",
-      "changePageFlagN"
-    ]),
+    ...mapActions(["fetchAll", "fetchMoreComments", "turnFlag"]),
     moreComments() {
       this.fetchMoreComments();
     }
@@ -70,16 +67,11 @@ export default {
     Comment,
     Info,
     BackToTop,
-    Addition
+    Addition,
+    Loading
   },
   beforeRouteLeave(to, from, next) {
-    this.turnFlag();
     next();
-  },
-  watch: {
-    hot_tags() {
-      this.isLoading(false);
-    }
   }
 };
 </script>

@@ -1,5 +1,5 @@
-import SignService from '../service/sign';
-import Cookie from '../service/cookie';
+import SignService from "../service/sign";
+import Cookie from "../service/cookie";
 
 const actions = {
   changeCurrentRoute({ commit }, path) {
@@ -29,24 +29,24 @@ const actions = {
   getToken({ commit }) {
     let email = SignService.getEmail();
     SignService.getToken(email).then(res => {
-      if (res !== null && res !== undefined){
-        Cookie.setCookie("token", res.token, 365)
+      if (res !== null && res !== undefined) {
+        Cookie.setCookie("token", res.token);
         commit("isLoading", false);
         window.location.href = Cookie.getCookie("url");
       } else {
         SignService.getUsername(email).then(info => {
           SignService.register(info.username, email).then(res => {
             SignService.getToken(email).then(res => {
-              Cookie.setCookie("token", res.token, 365)
+              Cookie.setCookie("token", res.token);
               commit("isLoading", false);
               window.location.href = Cookie.getCookie("url");
-            })
-          })
-        })
+            });
+          });
+        });
       }
-    })
+    });
   },
-  setToken({commit}, token) {
+  setToken({ commit }, token) {
     commit("setToken", token);
     commit("isLogin");
   }

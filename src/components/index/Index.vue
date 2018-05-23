@@ -53,7 +53,9 @@ export default {
 .link {
   display: inline-block;
   color: #666666;
-  line-height: 44px;
+  height: 48px;
+  box-sizing: border-box;
+  line-height: 48px;
 }
 
 .active {

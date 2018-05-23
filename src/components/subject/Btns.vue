@@ -39,7 +39,7 @@ export default {
   display: inline-block;
 }
 .tip_btn {
-  border: 1px solid #eeab5d;
+  border: 1px solid #eeab5d; /*px*/
   font-size: 14px; /*px*/
   border-radius: 4px; /*px*/
   display: inline-block;

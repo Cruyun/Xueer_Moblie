@@ -1,5 +1,5 @@
 <template>
-	<div v-show='is_loading' :class="$style.loading">
+	<div  :class="$style.loading">
 	    <div :class="[$style.boxes, $style.space]">
 	        <div :class="[$style.box, $style.left]"></div>
 	        <div :class="[$style.box, $style.middle]"></div>
@@ -8,12 +8,7 @@
 	 </div>
 </template>
 <script>
-import { mapActions, mapState, mapGetters } from "vuex";
-export default {
-  computed: {
-    ...mapState(["is_loading"])
-  }
-};
+export default {};
 </script>
 <style lang='scss' module>
 .loading {

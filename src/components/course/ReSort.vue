@@ -80,7 +80,7 @@ export default {
   font-size: 14px; /*px*/
 }
 .comment {
-  border-right: 2px solid #666; /*px*/
+  border-right: 1px solid #666; /*px*/
 }
 .active {
   color: #eeab5d;

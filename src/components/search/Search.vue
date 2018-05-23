@@ -63,7 +63,8 @@ export default {
       "changePageFlagY",
       "searchCourse",
       "isLoading",
-      "initSearchParam"
+      "initSearchParam",
+      "setKeyWord"
     ]),
     hiddenSearch() {
       this.hideSearch();
@@ -89,12 +90,13 @@ export default {
       } else {
         main_cat = "null";
       }
-      const option = {
-        key_word: info,
-        main_cat: main_cat
-      };
+      // const option = {
+      //   key_word: info,
+      //   main_cat: main_cat
+      // };
+      this.setKeyWord(info);
       // this.initSearchParam(option);
-      this.searchCourse(option);
+      this.searchCourse();
       this.$router.push({
         name: "search"
       });

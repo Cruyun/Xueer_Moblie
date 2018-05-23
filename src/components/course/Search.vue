@@ -41,14 +41,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getPosition",
-      "changePageFlagN",
-      "changePageFlagY",
-      "fetchCoursesList",
-      "fetchNextCoursesList",
       "searchCourse",
       "isLoading",
-      "searchNextCourse"
+      "searchNextCourse",
+      "setMainCat"
     ]),
     searchAgain() {
       this.isLoading(true);
@@ -56,10 +52,8 @@ export default {
       if (this.catgories.length) {
         main_cat = this.catgories[0];
       }
-      const option = {
-        main_cat: main_cat
-      };
-      this.searchCourse(option);
+      this.setMainCat(main_cat);
+      this.searchCourse();
     },
     scrollHandler(ev) {
       if (this.search_end) return;

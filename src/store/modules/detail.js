@@ -2,6 +2,7 @@ import DetailService from "../../service/detail";
 import FetchData from "../../service/fetch";
 import State from "../state";
 const state = {
+  loading: true,
   info: {},
   comments: [],
   hot_comments: [],
@@ -57,6 +58,7 @@ const actions = {
       commit("setInfo", value[0]);
       commit("setComments", value[1]);
       commit("setHotComments", value[2]);
+      commit("setLoading", false);
     });
   },
   fetchMoreComments({ commit }) {
@@ -126,6 +128,10 @@ const actions = {
 const mutations = {
   initPage(state) {
     state.page = 1;
+    state.loading = true;
+  },
+  setLoading(state, loading) {
+    state.loading = loading;
   },
   setId(state, id) {
     state.course_id = id;

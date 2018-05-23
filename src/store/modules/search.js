@@ -16,7 +16,6 @@ function getQueryParams(state) {
   let obj = {
     keywords: state.key_word,
     page: state.search_page,
-    sort: state.sort,
     per_page: 20,
     main_cat: state.main_cat
   };
@@ -26,7 +25,6 @@ const state = {
   hot: [],
   show_search: false,
   result: [],
-  sort: "view",
   search_page: 1,
   key_word: "",
   total_search_pages: 0,
@@ -44,19 +42,6 @@ const getters = {
   }
 };
 const actions = {
-  // initSearchParam({ commit }, option) {
-  //   console.log("init")
-  //   if (!option) {
-  //     option = {}
-  //   }
-  //   if (option.key_word) {
-  //     commit("setKeyWord", option.key_word);
-  //   }
-  //   if (option.sort) {
-  //     commit("setSort", option.sort);
-  //   }
-  //   state.search_page = 1;
-  // },
   fetchHot({ commit }) {
     SearchService.getHot().then(json => {
       commit("fetchHot", json);
@@ -68,20 +53,14 @@ const actions = {
   hideSearch({ commit }) {
     commit("hideSearch");
   },
-  searchCourse({ commit }, option) {
-    if (!option) {
-      option = {};
-    }
-    if (option.key_word) {
-      commit("setKeyWord", option.key_word);
-    }
-    if (option.sort) {
-      commit("setSort", option.sort);
-    }
-    if (option.main_cat) {
-      let index = findKey(MAIN_CAT_MAP, option.main_cat);
-      commit("setMainCat", index);
-    }
+  setKeyWord({ commit }, key_word) {
+    commit("setKeyWord", key_word);
+  },
+  setMainCat({ commit }, main_cat) {
+    let index = findKey(MAIN_CAT_MAP, main_cat);
+    commit("setMainCat", index);
+  },
+  searchCourse({ commit }) {
     commit("initPage");
     let param = getQueryParams(state);
     SearchService.searchCourse(param).then(({ json, headers }) => {
@@ -104,9 +83,6 @@ const actions = {
 const mutations = {
   setKeyWord(state, key_word) {
     state.key_word = key_word;
-  },
-  setSort(state, sort) {
-    state.sort = sort;
   },
   initPage(state) {
     state.search_page = 1;

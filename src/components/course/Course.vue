@@ -1,11 +1,12 @@
 <template>
 	<div v-scroll="scrollHandler">
-		<selector @fetchAgain="fetchCoursesList" v-if="is_selected" :catgories="catgories"></selector>
-		<reSort @fetchAgain="fetchCoursesList"></reSort>
-    <courseList :courses="courses"></courseList>
+		<selector v-if="is_selected" :catgories="catgories"/>
+		<reSort/>
+    <courseList/>
 		<div v-if='isend' :class="$style.hint">(￣▽￣") 已经是全部的结果啦</div>
 		<div v-else :class="$style.hint">(￣▽￣") 加载中</div>
-    <backToTop></backToTop>
+    <backToTop/>
+    <loading v-show="loading"/>
 	</div>
 </template>
 
@@ -17,6 +18,7 @@ import ReSort from "./ReSort.vue";
 import CourseList from "./CourseList.vue";
 import scroll from "../../directives/scroll.js";
 import BackToTop from "../common/BackToTop.vue";
+import Loading from "../common/Loading.vue";
 
 export default {
   data() {
@@ -29,7 +31,11 @@ export default {
     this.changePageFlagY(["is_all"]);
     this.$route.params.page == "all" ? "" : (this.flag = false);
     let page = this.page;
-    this.fetchCoursesList();
+    // 判断store中是否已经有课程列表了，如果有，说明不是第一次加载课程列表。为了保持用户之前列表的状态，就不重新加载了。
+    if (this.courses.length > 0) {
+    } else {
+      this.fetchCoursesList();
+    }
   },
   computed: {
     ...mapGetters([
@@ -40,6 +46,8 @@ export default {
       "is_recommend"
     ]),
     ...mapState({
+      courses: state => state.courselist.courses,
+      loading: state => state.courselist.loading,
       loadingMore: state => state.courselist.loadingMore,
       page: state => state.courselist.page,
       catgories: state => state.courselist.catgories
@@ -55,25 +63,15 @@ export default {
       "fetchNextCoursesList"
     ]),
     scrollHandler(ev) {
+      // TODO: 把scroll的位置同步到store，然后在返回列表的时候恢复滚动的位置。
       if (this.loadingMore) return;
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 120 // 在滑到最底部之前，提前一点加载
+      ) {
         // you're at the bottom of the page
         this.fetchNextCoursesList();
       }
-      // const scroll_height = document.body.scrollTop;
-      // const doc_height = document.body.scrollHeight;
-      // if (!this.window_height) {
-      //   this.window_height = window.innerHeight;
-      // }
-      // const height = scroll_height + this.window_height;
-      // if (height == doc_height && this.fetch_flag == true) {
-      //   this.changePageFlagN("fetch_flag");
-      //   this.fetchCourse(this.$route.params.sort);
-      // }
-      // if (scroll_height == 0 && this.fetch_flag == true) {
-      //   this.changePageFlagN("fetch_flag");
-      //   this.fetchCourseN(this.$route.params.sort);
-      // }
     }
   },
   directives: {
@@ -83,19 +81,10 @@ export default {
     Selector,
     ReSort,
     CourseList,
-    BackToTop
+    BackToTop,
+    Loading
   },
   beforeRouteLeave(to, from, next) {
-    // this.getPosition(document.body.scrollTop);
-    // // 跳转到detail还会有个莫名其妙的滚动
-    // this.changePageFlagN("fetch_flag");
-    // if (to.name === "course") {
-    //   this.changePageFlagN("is_index");
-    //   this.changePageFlagN("is_all");
-    //   this.changePageFlagY("is_course");
-    // }
-    // this.changePageFlagN(["is_search", "is_all", "is_recommend"]);
-    // this.changePageFlagY("is_index");
     next();
   }
 };

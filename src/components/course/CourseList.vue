@@ -54,6 +54,7 @@ export default {
 <style lang='scss' module>
 .flex {
   display: flex;
+  align-items: center;
 }
 .list {
   width: 100%;
@@ -63,7 +64,7 @@ export default {
   width: 333px;
   margin: 0 auto;
   padding: 20px 0 16px;
-  border-bottom: 2px solid #ececec; /*px*/
+  border-bottom: 1px solid #ececec; /*px*/
 }
 .avatar {
   font-size: 20px; /*px*/

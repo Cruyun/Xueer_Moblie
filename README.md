@@ -19,15 +19,14 @@ ninja start
 
 #### Now
 
-* Add HTML compliation
-* Recycle View for list
-* Add server side code
-* Muxi auth integration
-* Add PC FE code
-* Full Code Review
+* [x] Add HTML compliation
+* [ ] Recycle View for list
+* [x] Add server side code
+* [x] Muxi auth integration
+* [ ] Full Code Review
+* [ ] Refactor Mangament Service
 
 #### Long-term
 
-* Refactor Mangament Service
-* PWA support
-* UX enchancement
+* [ ] PWA support
+* [ ] UX enchancement

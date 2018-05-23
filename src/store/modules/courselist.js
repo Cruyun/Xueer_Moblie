@@ -67,6 +67,7 @@ const actions = {
         );
         commit("insertCourses", json);
         commit("setListMetaData", totalPages);
+        commit("setLoading", false);
       }
     );
   },
@@ -114,6 +115,7 @@ const mutations = {
   reset(state) {
     state.page = 1;
     state.courses = [];
+    state.loading = true;
   },
   insertCourses(state, courses) {
     state.courses = state.courses.concat(courses);
@@ -126,6 +128,9 @@ const mutations = {
   },
   setSort(state, sort) {
     state.sort = sort;
+  },
+  setLoading(state, loading) {
+    state.loading = loading;
   },
   setLoadingMore(state, loading) {
     state.loadingMore = loading;

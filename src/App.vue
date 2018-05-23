@@ -5,7 +5,6 @@
 		<search></search>
 		<index></index>
 		<foot></foot>
-		<loading></loading>
 		<loginDialog></loginDialog>
 	</div>
 </template>
@@ -16,7 +15,6 @@ import NavBar from "./components/common/NavBar.vue";
 import Search from "./components/search/Search.vue";
 import Index from "./components/index/Index.vue";
 import Foot from "./components/common/Foot.vue";
-import Loading from "./components/common/Loading.vue";
 import LoginDialog from "./components/common/LoginDialog.vue";
 
 export default {
@@ -26,7 +24,6 @@ export default {
     Search,
     Index,
     Foot,
-    Loading,
     LoginDialog
   }
 };
