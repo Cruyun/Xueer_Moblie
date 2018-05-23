@@ -18,6 +18,8 @@
         	<span v-if="currentRoute === 'course'" :class="[$style.title_l, $style.title]">课程详情</span>
           <span v-if="currentRoute === 'recommend'" :class="[$style.title_l, $style.title]">推荐课程</span>
           <span v-if="currentRoute === 'search'" :class="[$style.title_l, $style.title]">搜索结果</span>
+          <span v-if="currentRoute === 'newComment'" :class="[$style.title_l, $style.title]">写评价</span>
+
 					<!-- <span v-if="is_search_res" :class="[$style.title_l, $style.title]">搜索结果</span>
 					<span v-if="is_recommend" :class="[$style.title_l, $style.title]">推荐课程</span>
 					<span v-if="is_auth" :class="[$style.title_l, $style.title]">我的学而</span>
@@ -47,34 +49,15 @@ import Cookie from "../../service/cookie";
 export default {
   computed: {
     ...mapState(["page_flag", "currentRoute"]),
-    ...mapGetters([
-      "snaps",
-      "is_index",
-      "is_recommend",
-      "is_all",
-      "is_search",
-      "is_auth",
-      "is_course",
-      "is_sub",
-      "is_logined"
-    ])
+    ...mapGetters([])
   },
   methods: {
-    ...mapActions([
-      "showSearch",
-      "changePageFlagN",
-      "changePageFlagY",
-      "getSnaps",
-      "setToken"
-    ]),
+    ...mapActions(["showSearch", "setToken"]),
     backStep() {
       this.$router.go(-1);
     },
     displaySearch() {
-      this.getSnaps(this.snaps);
       this.showSearch();
-      // this.changePageFlagY(['is_search'])
-      // this.changePageFlagN(['is_all','is_auth','is_recommend','is_sub'])
     },
     toLogin() {
       Cookie.setCookie("url", window.location.href);

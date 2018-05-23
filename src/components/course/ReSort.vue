@@ -20,6 +20,7 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
+  props: ["changeSortMethod"],
   data() {
     return {
       isactive: true,
@@ -33,18 +34,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions([
-      "fetchCourse",
-      "isLoading",
-      "initCourse",
-      "showSelector",
-      "changeSortMethod",
-      "fetchCoursesList"
-    ]),
+    ...mapActions(["fetchCourse", "isLoading", "initCourse", "showSelector"]),
     reSort(method) {
       this.changeSortMethod(method);
-      // this.fetchCoursesList();
-      this.$emit("fetchAgain");
+      this.$emit("change");
     },
     Selector() {
       this.showSelector(!this.is_selected);

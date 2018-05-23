@@ -1,34 +1,33 @@
 import SearchService from "../../service/search";
-const MAIN_CAT_MAP = {
-  0: "null",
-  1: "gg_cat",
-  2: "ts_cat",
-  3: "zy_cat",
-  4: "sz_cat"
-};
-//创建一个方法，返回value值对应的key
-function findKey(obj, value, compare = (a, b) => a === b) {
-  return Object.keys(obj).find(k => compare(obj[k], value));
-}
+
 // params hepler
 function getQueryParams(state) {
-  let mainCatKey;
   let obj = {
     keywords: state.key_word,
     page: state.search_page,
-    per_page: 20,
-    main_cat: state.main_cat
+    sort: state.sort,
+    pre_page: state.pre_page
   };
+  if (state.catgories.length >= 0) {
+    state.catgories.forEach(item => {
+      obj[item] = 1;
+    });
+  }
   return obj;
 }
+
 const state = {
   hot: [],
   show_search: false,
   result: [],
+
+  // params
   search_page: 1,
   key_word: "",
   total_search_pages: 0,
-  main_cat: 0
+  sort: "view",
+  catgories: [],
+  pre_page: 20
 };
 const getters = {
   hot: () => state.hot,
@@ -56,9 +55,11 @@ const actions = {
   setKeyWord({ commit }, key_word) {
     commit("setKeyWord", key_word);
   },
-  setMainCat({ commit }, main_cat) {
-    let index = findKey(MAIN_CAT_MAP, main_cat);
-    commit("setMainCat", index);
+  changeSearchSortMethod({ commit }, method) {
+    commit("setSort", method);
+  },
+  changeSearchSelector({ commit }, sort) {
+    commit("changeSelector", sort);
   },
   searchCourse({ commit }) {
     commit("initPage");
@@ -81,6 +82,12 @@ const actions = {
   }
 };
 const mutations = {
+  setSort(state, sort) {
+    state.sort = sort;
+  },
+  changeSelector(state, sort) {
+    state.catgories = sort;
+  },
   setKeyWord(state, key_word) {
     state.key_word = key_word;
   },

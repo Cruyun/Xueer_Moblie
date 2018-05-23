@@ -1,7 +1,7 @@
 <template>
 	<div v-scroll="scrollHandler">
-		<selector @fetchAgain="searchAgain" v-if="is_selected" :catgories="catgories"></selector>
-		<reSort></reSort>
+		<selector @change="searchAgain" :changeSelector="changeSearchSelector" v-if="is_selected" :catgories="catgories"></selector>
+		<reSort @change="searchAgain" :changeSortMethod="changeSearchSortMethod"></reSort>
     <courseList :courses="result"></courseList>
 		<div v-if='search_end' :class="$style.hint">(￣▽￣") 已经是全部的结果啦</div>
 		<div v-else :class="$style.hint">(￣▽￣") 加载中</div>
@@ -44,15 +44,12 @@ export default {
       "searchCourse",
       "isLoading",
       "searchNextCourse",
-      "setMainCat"
+      "setMainCat",
+      "changeSearchSortMethod",
+      "changeSearchSelector"
     ]),
     searchAgain() {
       this.isLoading(true);
-      let main_cat = "null";
-      if (this.catgories.length) {
-        main_cat = this.catgories[0];
-      }
-      this.setMainCat(main_cat);
       this.searchCourse();
     },
     scrollHandler(ev) {

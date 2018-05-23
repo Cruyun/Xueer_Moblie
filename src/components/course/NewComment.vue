@@ -6,7 +6,7 @@
 				<svg :class="[$style.nav_icon, $style.tag_icon]">
 		      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#tag_icon"></use>
 		    </svg>
-		    <div :class="$style.pre_tags_item" v-for="item in pre_tags" :key="pre_tags.indexOf(item)" >{{ item | preTag }}</div>
+		    <div :class="$style.pre_tags_item" v-for="item in pre_tags" :key="pre_tags.indexOf(item)" >{{item}}</div>
 		    <input @keyup.delete="deleteTag" v-model='tags' :class="$style.tag_input" type="text" name="tag" placeholder="输入空格确认">
 			</div>
 		</div>

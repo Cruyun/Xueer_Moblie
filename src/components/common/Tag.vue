@@ -16,9 +16,9 @@ export default {
     ...mapGetters(["hot_tag", "tag_exist"])
   },
   methods: {
-    ...mapActions(["clickTag", "getTags"]),
+    ...mapActions(["addPreTag", "getTags"]),
     addTag(item) {
-      this.$store.commit("clickTag", item);
+      this.$store.commit("addPreTag", item);
     }
   },
   created() {

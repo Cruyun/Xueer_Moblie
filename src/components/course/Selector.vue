@@ -15,7 +15,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  props: ["catgories"],
+  props: ["catgories", "changeSelector"],
   data() {
     return {
       isactive: true,
@@ -23,7 +23,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["showSelector", "fetchSelector", "fetchCoursesList"]),
+    ...mapActions(["showSelector", "fetchCoursesList"]),
     addTag(e) {
       const index = this.selected.indexOf(e.target.id);
       if (index == -1) {
@@ -41,18 +41,8 @@ export default {
     },
     select() {
       this.hideSelector();
-      // const info = this.$route.params.txt;
-      // if (info) {
-      //   const option = {
-      //     info: info,
-      //     search: true
-      //   };
-      //   this.initCourse(option);
-      // } else {
-      //   this.initCourse();
-      // }
-      this.fetchSelector(this.selected);
-      this.$emit("fetchAgain");
+      this.changeSelector(this.selected);
+      this.$emit("change");
       this.is_selected
         ? (document.body.className = "no_scroll")
         : (document.body.className = "");

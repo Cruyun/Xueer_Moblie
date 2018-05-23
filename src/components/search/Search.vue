@@ -59,8 +59,6 @@ export default {
     ...mapActions([
       "fetchHot",
       "hideSearch",
-      "changePageFlagN",
-      "changePageFlagY",
       "searchCourse",
       "isLoading",
       "initSearchParam",
@@ -68,14 +66,6 @@ export default {
     ]),
     hiddenSearch() {
       this.hideSearch();
-      this.changePageFlagN("is_search");
-      for (var key in this.page_snaps) {
-        if (this.page_snaps[key]) {
-          this.changePageFlagY(key);
-        } else {
-          this.changePageFlagN(key);
-        }
-      }
     },
     search() {
       const info = this.info;
