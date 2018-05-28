@@ -11,13 +11,11 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
-
 import Selector from "./Selector.vue";
 import ReSort from "./ReSort.vue";
 import CourseList from "./CourseList.vue";
 import scroll from "../../directives/scroll.js";
 import BackToTop from "../common/BackToTop.vue";
-
 export default {
   data() {
     return {

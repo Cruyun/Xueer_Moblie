@@ -17,14 +17,18 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
       }
     });
   },
   getComments(id, page, token) {
-    return Fetch("/api/v1.0/courses/" + id + "/comments/?page=" + page + "&per_page=10",{
+    return Fetch(
+      "/api/v1.0/courses/" + id + "/comments/?page=" + page + "&per_page=10",
+      {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(token + ":")
         }
       }
     );
@@ -34,6 +38,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(token + ":")
       }
     });
   },

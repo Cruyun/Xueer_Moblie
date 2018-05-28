@@ -26,6 +26,12 @@
   fill: #ec6941;
   transition: fill 0.2s 0.6s;
 }
+.liked_end {
+  animation: lovestar 0s 0s 0 ease-in-out normal none;
+}
+.liked_end + svg > use {
+  fill: #ec6941;
+}
 .no_scroll {
   overflow: hidden;
 }

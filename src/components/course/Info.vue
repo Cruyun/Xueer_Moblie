@@ -4,7 +4,11 @@
 		<div :class="$style.teacher">{{ info.teacher }}</div>
 		<div :class="$style.btns">
 			<div @click="likeCourse" :class="$style.btn" :id="info.id">
-				<svg viewBox="0 0 17 15" :class="[$style.icon, info.liked ? $style.heart_icon_filled : $style.heart_icon_out]">
+				<svg viewBox="0 0 17 15"  v-bind:css="false" :class="[$style.icon, 
+        clickLike ? $style.heart_icon_filled : '',
+        clickDisLike ? $style.heart_icon_out : '',
+        notClick && liked ? $style.heart_icon_filled_end : '',
+        notClick && !liked ? $style.heart_icon_out_end : '']">
 					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
 				</svg>
 				<svg viewBox="0 0 17 15" :class="[$style.icon]">
@@ -27,8 +31,22 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["info"],
+  data() {
+    return {
+      clickLike: false,
+      clickDisLike: false,
+      liked: this.info.liked
+    };
+  },
   computed: {
-    ...mapGetters(["is_logined", "course_id"])
+    ...mapGetters(["is_logined", "course_id"]),
+    notClick: function() {
+      if (!this.clickLike && !this.clickDisLike) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     ...mapActions(["fetchInfo", "showLogin", "courseLike", "courseDisLike"]),
@@ -36,9 +54,13 @@ export default {
       if (this.is_logined) {
         if (this.info.liked) {
           // 已经点赞，现在来取消
+          this.clickDisLike = true;
+          this.clickLike = false;
           this.courseDisLike();
         } else {
           // 未点赞，现在来点
+          this.clickLike = true;
+          this.clickDisLike = false;
           this.courseLike();
         }
       } else {
@@ -103,7 +125,7 @@ export default {
 }
 .btn {
   display: inline-block;
-  border: 2px solid #fff; /*px*/
+  border: 1px solid #fff; /*px*/
   border-radius: 4px; /*px*/
   vertical-align: top;
   overflow: hidden;
@@ -120,24 +142,23 @@ export default {
 .btn_text {
   vertical-align: middle;
 }
-.icon {
-  width: 17px;
-  height: 14px;
-  margin-right: 8px;
-}
 .btn_text {
   display: inline-block;
   min-width: 48px;
   text-align: center;
   font-size: 14px; /*px*/
 }
-// .heart_icon,
-// .heart_icon_filled {
-//   transform: translateX(-5.555556rem);
-// }
-.heart_icon {
-  animation-fill-mode: forwards;
-  animation: heart_s ease-in-out 1s;
+.icon {
+  width: 17px;
+  height: 14px;
+  margin-right: 8px;
+  // position: absolute;
+  fill: none;
+}
+.heart_icon_out_end {
+  position: absolute;
+  fill: #fff;
+  transform: translateX(-667%);
 }
 .heart_icon_out {
   position: absolute;
@@ -146,12 +167,6 @@ export default {
   animation: heart_s ease-out 1s;
   transform: translateX(-667%);
 }
-.heart_icon_filled {
-  position: absolute;
-  fill: #fff;
-  animation: heart_f ease-in-out 1s;
-  animation-fill-mode: forwards;
-}
 @keyframes heart_s {
   0% {
     transform: translateX(0) rotate(0deg);
@@ -159,6 +174,16 @@ export default {
   100% {
     transform: translateX(667%) rotate(400deg);
   }
+}
+.heart_icon_filled_end {
+  position: absolute;
+  fill: #fff;
+}
+.heart_icon_filled {
+  position: absolute;
+  fill: #fff;
+  animation: heart_f ease-in-out 1s;
+  animation-fill-mode: forwards;
 }
 @keyframes heart_f {
   0% {
