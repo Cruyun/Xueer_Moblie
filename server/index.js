@@ -13,13 +13,18 @@ const templateRoot = path.join(__dirname, "../dist/template")
 app.use(userAgent);
 app.use(bodyParser());
 
-router.get('/', function(ctx, next){
-    ctx.cookies.set("landing", ctx.request.query.landing, {
-        httpOnly: false,
-    })
-    let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
-    ctx.body = template({});
-});
+const routerArr = ["/", "/all", "/course/:id", "/course/:id/comment", "/search", "/tip/:id", "/landing"]
+
+for (let i = 0; i < routerArr.length; i++) {
+    router.get(routerArr[i], function(ctx, next){
+        ctx.cookies.set("landing", ctx.request.query.landing, {
+            httpOnly: false,
+        })
+        let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
+        ctx.body = template({});
+    });
+}
+
 
 router.get(/^\/static(?:\/|$)/, async(ctx) => {
     let filePath = ctx.path.replace(/static\//, "")
