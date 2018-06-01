@@ -10,7 +10,6 @@
 import { mapState, mapActions } from "vuex";
 
 import Selector from "./Selector.vue";
-import ReSort from "./ReSort.vue";
 import CourseList from "./CourseList.vue";
 import NextBatch from "./NextBatch.vue";
 
@@ -19,10 +18,8 @@ export default {
     ...mapState(["is_selected", "is_index"])
   },
   mounted() {
-    var self = this;
-    // self.changePageFlagY(['is_recommend'])
-    // self.changePageFlagN(['is_index'])
-    setTimeout(function() {
+    const self = this;
+    setTimeout(() => {
       self.changePageFlagY(["is_recommend"]);
       self.changePageFlagN(["is_index"]);
     }, 0);

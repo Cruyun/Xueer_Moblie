@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
 import { subStr } from "../../filters/filter.js";
 
 export default {

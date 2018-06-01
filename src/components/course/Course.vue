@@ -27,8 +27,7 @@ export default {
   mounted() {
     window.scrollTo(0, this.scrollTop);
     // 判断store中是否已经有课程列表了，如果有，说明不是第一次加载课程列表。为了保持用户之前列表的状态，就不重新加载了。
-    if (this.courses.length > 0) {
-    } else {
+    if (this.courses.length <= 0) {
       this.fetchCoursesList();
     }
   },
@@ -52,7 +51,7 @@ export default {
       "fetchNextCoursesList",
       "changeSortMethod"
     ]),
-    scrollHandler(ev) {
+    scrollHandler() {
       // 把scroll的位置同步到store，然后在返回列表的时候恢复滚动的位置。
       this.setScrollTop(window.scrollY);
       if (this.loadingMore) return;

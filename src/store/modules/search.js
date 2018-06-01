@@ -2,7 +2,7 @@ import SearchService from "../../service/search";
 
 // params hepler
 function getQueryParams(state) {
-  let obj = {
+  const obj = {
     keywords: state.key_word,
     page: state.search_page,
     sort: state.sort,
@@ -63,9 +63,9 @@ const actions = {
   },
   searchCourse({ commit }) {
     commit("initPage");
-    let param = getQueryParams(state);
+    const param = getQueryParams(state);
     SearchService.searchCourse(param).then(({ json, headers }) => {
-      let totalPages = Number(
+      const totalPages = Number(
         /page=([0-9]+)/.exec(headers[0].split(";")[1])[1]
       );
       commit("initResult");
@@ -75,8 +75,8 @@ const actions = {
   },
   searchNextCourse({ commit }) {
     commit("searchPageAdd");
-    let param = getQueryParams(state);
-    SearchService.searchCourse(param).then(({ json, headers }) => {
+    const param = getQueryParams(state);
+    SearchService.searchCourse(param).then(({ json }) => {
       commit("insertResult", json);
     });
   }

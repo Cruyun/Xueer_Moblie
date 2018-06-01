@@ -5,7 +5,7 @@
 </template>
 <script>
 // import Loading from "./Loading";
-import { mapState, mapGetter, mapActions, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
@@ -22,7 +22,7 @@ export default {
   },
   created() {
     this.isLoading(true);
-    this.getToken()
+    this.getToken();
   }
 };
 </script>

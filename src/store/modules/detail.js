@@ -1,6 +1,6 @@
 import DetailService from "../../service/detail";
-import FetchData from "../../service/fetch";
 import State from "../state";
+
 const state = {
   loading: true,
   info: {},
@@ -37,7 +37,6 @@ const getters = {
 const preprocess = json => {
   json.forEach(element => {
     if (element.body.length >= 60) {
-      element._body = element.body;
       element.body = element.body.substr(0, 60);
     }
   });

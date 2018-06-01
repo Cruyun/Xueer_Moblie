@@ -1,28 +1,30 @@
 <template>
-	<div :class="$style.info">
-		<h2 :class="$style.title">{{ info.title }}</h2>
-		<div :class="$style.teacher">{{ info.teacher }}</div>
-		<div :class="$style.btns">
-			<div @click="likeCourse" :class="$style.btn" :id="info.id">
-				<svg viewBox="0 0 17 15"  v-bind:css="false" :class="[$style.icon, 
-        clickLike ? $style.heart_icon_filled : '',
-        clickDisLike ? $style.heart_icon_out : '',
-        notClick && liked ? $style.heart_icon_filled_end : '',
-        notClick && !liked ? $style.heart_icon_out_end : '']">
-					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
-				</svg>
-				<svg viewBox="0 0 17 15" :class="[$style.icon]">
-					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_s"></use>
-				</svg>
-				<span :class="$style.btn_text">{{ info.likes }}</span>
-			</div>
-			<div @click="writeComment" :class="$style.btn" :id="info.id">
-				<svg viewBox="0 0 17 14" :class="[$style.icon, $style.comment_icon]">
-					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comments"></use>
-				</svg>
-				<span :class="$style.btn_text">写评价</span>
-			</div>
-		</div>
+	<div :class="[$style.info, $style[`info_bg${bg_index}`]]">
+    <div :class="$style.info_content">
+      <h2 :class="$style.title">{{ info.title }}</h2>
+      <div :class="$style.teacher">{{ info.teacher }}</div>
+      <div :class="$style.btns">
+        <div @click="likeCourse" :class="$style.btn" :id="info.id">
+          <svg viewBox="0 0 17 15"  v-bind:css="false" :class="[$style.icon,
+          clickLike ? $style.heart_icon_filled : '',
+          clickDisLike ? $style.heart_icon_out : '',
+          notClick && liked ? $style.heart_icon_filled_end : '',
+          notClick && !liked ? $style.heart_icon_out_end : '']">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_f"></use>
+          </svg>
+          <svg viewBox="0 0 17 15" :class="[$style.icon]">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#heart_s"></use>
+          </svg>
+          <span :class="$style.btn_text">{{ info.likes }}</span>
+        </div>
+        <div @click="writeComment" :class="$style.btn" :id="info.id">
+          <svg viewBox="0 0 17 14" :class="[$style.icon, $style.comment_icon]">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comments"></use>
+          </svg>
+          <span :class="$style.btn_text">写评价</span>
+        </div>
+      </div>
+    </div>
 	</div>
 </template>
 
@@ -35,17 +37,20 @@ export default {
     return {
       clickLike: false,
       clickDisLike: false,
-      liked: this.info.liked
+      liked: this.info.liked,
+      bg_index: 0
     };
+  },
+  created() {
+    this.bg_index = Math.floor(Math.random() * 4) + 1;
   },
   computed: {
     ...mapGetters(["is_logined", "course_id"]),
-    notClick: function() {
+    notClick() {
       if (!this.clickLike && !this.clickDisLike) {
         return true;
-      } else {
-        return false;
       }
+      return false;
     }
   },
   methods: {
@@ -81,47 +86,46 @@ export default {
 <style lang='scss' module>
 @import "../../assets/value.scss";
 .info {
-  position: relative;
-  padding: 16px 0;
+  height: 200px;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
   color: #fff;
+  background-size: 100% 100%;
 }
-.info::before {
-  content: ".";
-  font-size: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -100;
-  opacity: 0.8;
-  filter: alpha(opacity=.8);
-  background-color: $_yellow;
-  width: 100%;
-  height: 100%;
+.info_bg1 {
+  background-image: url("../../assets/xueer_bg_1.png");
 }
-.info::after {
-  content: ".";
-  font-size: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -200;
-  background-image: url("../../assets/course_bg.jpg");
-  width: 100%;
-  height: 100%;
+.info_bg2 {
+  background-image: url("../../assets/xueer_bg_2.png");
+}
+.info_bg3 {
+  background-image: url("../../assets/xueer_bg_3.png");
+}
+.info_bg4 {
+  background-image: url("../../assets/xueer_bg_4.png");
+}
+.info_content {
+  width: 328px;
+  height: 167px;
+  margin: 0 auto;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .title {
   font-size: 20px; /*px*/
-  line-height: 28px;
-  padding: 0 31px;
+  padding-left: 10px;
+  font-weight: lighter;
 }
 .teacher {
   font-size: 14px; /*px*/
-  line-height: 24px;
-  padding: 16px 31px 7px;
+  padding-left: 10px;
 }
 .btns {
   font-size: 0;
-  margin: 0 16px 16px;
+  width: 328px;
 }
 .btn {
   display: inline-block;

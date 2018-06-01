@@ -1,6 +1,6 @@
 import Fetch from "./fetch.js";
 
-let SignService = {
+const SignService = {
   getEmail() {
     return window.location.href
       .split("?")[1]
@@ -8,9 +8,12 @@ let SignService = {
       .split("=")[1];
   },
   getUsername(email) {
-    return Fetch("https://user.muxixyz.com/api/user/?email=" + decodeURIComponent(email), {
-      method: "GET"
-    });
+    return Fetch(
+      "https://user.muxixyz.com/api/user/?email=" + decodeURIComponent(email),
+      {
+        method: "GET"
+      }
+    );
   },
   getToken(email) {
     return Fetch("/api/v1.0/token/", {
@@ -18,7 +21,8 @@ let SignService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(decodeURIComponent(email) + ":muxi304")
+        Authorization:
+          "Basic " + window.btoa(decodeURIComponent(email) + ":muxi304")
       }
     });
   },
@@ -28,7 +32,8 @@ let SignService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic ZXlKcFpDSTZNVEY5LlljM0pTbElmRktPd0tKY3g0QXZwX2Y0bEZvUTo=" // btoa(管理员token)
+        Authorization:
+          "Basic ZXlKcFpDSTZNVEY5LlljM0pTbElmRktPd0tKY3g0QXZwX2Y0bEZvUTo=" // btoa(管理员token)
       },
       data: {
         username: decodeURIComponent(username),

@@ -33,6 +33,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -46,12 +47,11 @@ export default {
   props: ["item", "index"],
   computed: {
     ...mapGetters(["is_logined", "course_id"]),
-    notClick: function() {
+    notClick() {
       if (!this.clickLike && !this.clickDisLike) {
         return true;
-      } else {
-        return false;
       }
+      return false;
     }
   },
   methods: {
@@ -63,21 +63,23 @@ export default {
         return;
       }
       this.body = item.body;
+      /* eslint-disable */
       item.body = item._body;
+      /* eslint-enable */
     },
-    likeComments(item, index, e) {
+    likeComments(item, index) {
       if (this.is_logined) {
-        let id = item.id;
+        const item_id = item.id;
         if (!item.liked) {
           // console.log("喜欢");
           this.clickLike = true;
           this.clickDisLike = false;
-          this.commentsLike({ id, index });
+          this.commentsLike({ id: item_id, index });
         } else {
-          //console.log("不喜欢");
+          // console.log("不喜欢");
           this.clickLike = false;
           this.clickDisLike = true;
-          this.commentsDisLike({ id, index });
+          this.commentsDisLike({ id: item_id, index });
         }
       } else {
         this.showLogin(true);

@@ -30,7 +30,7 @@ export default {
     },
     backToTop() {
       window.smoothscroll = () => {
-        let currentScroll =
+        const currentScroll =
           document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
           window.requestAnimationFrame(window.smoothscroll);
@@ -38,8 +38,6 @@ export default {
             0,
             Math.floor(currentScroll - currentScroll / this.step)
           );
-        } else {
-          return;
         }
       };
       window.smoothscroll();

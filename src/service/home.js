@@ -1,6 +1,6 @@
 import Fetch from "./fetch.js";
 
-let HomeService = {
+const HomeService = {
   getTips() {
     return Fetch("/api/v1.0/tips/");
   }

@@ -31,7 +31,7 @@ export default {
         e.target.className += " filter-active";
       } else {
         this.selected.splice(index, 1);
-        let arr = e.target.className.split(" ");
+        const arr = e.target.className.split(" ");
         arr.pop();
         e.target.className = arr.join(" ");
       }

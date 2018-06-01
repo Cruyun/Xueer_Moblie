@@ -8,6 +8,7 @@
 
 <script>
 import CommentsItem from "./CommentsItem.vue";
+
 export default {
   props: ["comments"],
   components: {
@@ -20,7 +21,7 @@ export default {
 .comment_item {
   font-size: 0;
   padding-top: 21px;
-  border-bottom: 2px solid #ececec; /*px*/
+  border-bottom: 1px solid #ececec; /*px*/
 }
 .comment_item:last-child {
   margin-bottom: 16px;

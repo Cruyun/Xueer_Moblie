@@ -56,8 +56,8 @@ export default {
       this.submitComment(this.submit_body);
     },
     backStep() {
-      history.back();
-    },
+      window.history.back();
+    }
   },
   components: {
     Tag
@@ -65,7 +65,6 @@ export default {
 };
 </script>
 <style lang='scss' module>
-
 @import "../../assets/value.scss";
 
 .new_comment {
@@ -86,7 +85,7 @@ export default {
   box-sizing: border-box;
   padding: 17px 18px;
   border-top: 2px solid #ececec;
-  border-bottom: 2px solid #ececec; 
+  border-bottom: 2px solid #ececec;
 }
 .tag_cont {
   position: relative;

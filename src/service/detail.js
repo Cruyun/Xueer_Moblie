@@ -7,7 +7,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       },
       data: body
     });
@@ -17,7 +17,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   },
@@ -28,7 +28,7 @@ const DetailService = {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: "Basic " + btoa(token + ":")
+          Authorization: "Basic " + window.btoa(token + ":")
         }
       }
     );
@@ -38,7 +38,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   },
@@ -48,7 +48,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   },
@@ -58,7 +58,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   },
@@ -68,7 +68,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       },
       data: {
         body: text
@@ -81,7 +81,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   },
@@ -91,7 +91,7 @@ const DetailService = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(token + ":")
+        Authorization: "Basic " + window.btoa(token + ":")
       }
     });
   }

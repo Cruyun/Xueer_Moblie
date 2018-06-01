@@ -1,6 +1,6 @@
-export function encodeUrlParams(data) {
+export default function encodeUrlParams(data) {
   return Object.keys(data)
-    .map(function(key) {
+    .map(key => {
       return [key, data[key]].map(encodeURIComponent).join("=");
     })
     .join("&");

@@ -1,4 +1,5 @@
 import TagService from "../../service/tag";
+
 const state = {
   hot_tag: [],
   tag_exist: false
@@ -16,15 +17,15 @@ const actions = {
         }
       }
     });
-    commit("existTags")
+    commit("existTags");
   }
 };
 const mutations = {
   getTags(state, title) {
-    state.hot_tag.push(title)
+    state.hot_tag.push(title);
   },
   existTags(state) {
-    state.tag_exist = true
+    state.tag_exist = true;
   }
 };
 export default {

@@ -27,7 +27,7 @@ const actions = {
     commit("initData", data);
   },
   getToken({ commit }) {
-    let email = SignService.getEmail();
+    const email = SignService.getEmail();
     SignService.getToken(email).then(res => {
       if (res !== null && res !== undefined) {
         Cookie.setCookie("token", res.token);
@@ -35,7 +35,7 @@ const actions = {
         window.location.href = Cookie.getCookie("url");
       } else {
         SignService.getUsername(email).then(info => {
-          SignService.register(info.username, email).then(res => {
+          SignService.register(info.username, email).then(() => {
             SignService.getToken(email).then(res => {
               Cookie.setCookie("token", res.token);
               commit("isLoading", false);

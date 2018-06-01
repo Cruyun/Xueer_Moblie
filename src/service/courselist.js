@@ -1,6 +1,6 @@
 import Fetch from "./fetch.js";
 
-let CoursesListService = {
+const CoursesListService = {
   viewCourse(page) {
     return Fetch("api/v1.0/courses/?sort=view&page=" + page);
   },

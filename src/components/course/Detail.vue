@@ -2,6 +2,7 @@
 	<div :class="$style.detail">
 		<info :info='info'/>
 		<div :class="$style.tags">
+      <span :class="$style.tags_item">{{info.main_category}}</span>
 			<span v-for="item in hot_tags" :class="$style.tags_item" :key="item.id">{{ item }}</span>
 		</div>
 		<addition/>
@@ -51,10 +52,8 @@ export default {
       "back"
     ])
   },
-  created() {
-    this.fetchAll(this.$route.params.id);
-  },
   mounted() {
+    this.fetchAll(this.id);
     window.scroll(0, 0);
   },
   methods: {
@@ -103,10 +102,10 @@ export default {
   font-size: 16px; /*px*/
   padding: 0 0 16px;
   color: #666;
-  border-bottom: 2px solid #ececec; /*px*/
+  border-bottom: 1px solid #ececec; /*px*/
 }
 .more_comments {
-  border: 2px solid currentColor; /*px*/
+  border: 1px solid currentColor; /*px*/
   border-radius: 4px; /*px*/
   text-align: center;
   width: 156px;

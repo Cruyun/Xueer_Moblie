@@ -16,6 +16,7 @@ import ReSort from "./ReSort.vue";
 import CourseList from "./CourseList.vue";
 import scroll from "../../directives/scroll.js";
 import BackToTop from "../common/BackToTop.vue";
+
 export default {
   data() {
     return {
@@ -50,7 +51,7 @@ export default {
       this.isLoading(true);
       this.searchCourse();
     },
-    scrollHandler(ev) {
+    scrollHandler() {
       if (this.search_end) return;
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         // you're at the bottom of the page

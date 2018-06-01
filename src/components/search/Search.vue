@@ -68,24 +68,12 @@ export default {
       this.hideSearch();
     },
     search() {
-      const info = this.info;
       if (!this.info) {
         return;
       }
       this.hiddenSearch();
       this.isLoading(true);
-      let main_cat;
-      if (this.catgories.length) {
-        main_cat = this.catgories[0];
-      } else {
-        main_cat = "null";
-      }
-      // const option = {
-      //   key_word: info,
-      //   main_cat: main_cat
-      // };
-      this.setKeyWord(info);
-      // this.initSearchParam(option);
+      this.setKeyWord(this.info);
       this.searchCourse();
       this.$router.push({
         name: "search"

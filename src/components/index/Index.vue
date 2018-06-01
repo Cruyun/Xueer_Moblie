@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { mapState } from "Vuex";
+import { mapState } from "vuex";
+
 export default {
   computed: mapState(["is_index", "is_search", "is_recommend", "currentRoute"])
 };

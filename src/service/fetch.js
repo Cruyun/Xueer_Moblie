@@ -1,4 +1,4 @@
-import { encodeUrlParams } from "../util";
+import encodeUrlParams from "../util";
 
 /**
  *
@@ -37,8 +37,7 @@ export default function FetchData(url, opt = {}) {
       switch (response.status) {
         case 200:
           if (opt.responseHeaders && opt.responseHeaders.length) {
-            let headers;
-            headers = opt.responseHeaders.map(key => {
+            const headers = opt.responseHeaders.map(key => {
               return response.headers.get(key);
             });
             return {
@@ -49,8 +48,7 @@ export default function FetchData(url, opt = {}) {
           return json;
         case 201:
           if (opt.responseHeaders && opt.responseHeaders.length) {
-            let headers;
-            headers = opt.responseHeaders.map(key => {
+            const headers = opt.responseHeaders.map(key => {
               return response.headers.get(key);
             });
             return {
@@ -61,8 +59,10 @@ export default function FetchData(url, opt = {}) {
           return json;
         case 502:
           // util.message is not defined
-          util.message(response.statusText, "err");
+          // util.message(response.statusText, "err");
           throw response.statusText;
+        default:
+          return 0;
       }
     });
   });

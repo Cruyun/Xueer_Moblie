@@ -1,6 +1,6 @@
 import Fetch from "./fetch.js";
 
-let SearchService = {
+const SearchService = {
   getHot() {
     return Fetch("/api/v1.0/search/hot/");
   },

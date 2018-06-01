@@ -1,5 +1,3 @@
-import Cookie from "../service/cookie";
-
 const mutations = {
   changeCurrentRoute(state, path) {
     state.currentRoute = path;
@@ -23,9 +21,9 @@ const mutations = {
     }
   },
   getSnaps(state, snaps) {
-    for (const key in snaps) {
-      state.page_snaps[key] = snaps[key];
-    }
+    Object.entries(snaps).forEach(([key, value]) => {
+      state.page_snaps[key] = value;
+    });
   },
   isLoading(state, flag) {
     state.is_loading = flag;
@@ -40,11 +38,10 @@ const mutations = {
     state[data] = "";
   },
   setToken(state, token) {
-    state.token = token
-   
+    state.token = token;
   },
   isLogin(state) {
-    state.is_logined = true
+    state.is_logined = true;
   }
 };
 

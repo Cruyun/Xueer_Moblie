@@ -1,6 +1,6 @@
 import Fetch from "./fetch.js";
 
-let TagService = {
+const TagService = {
   getTags() {
     return Fetch("/api/v1.0/tags/");
   }

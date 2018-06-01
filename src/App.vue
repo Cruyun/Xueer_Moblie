@@ -11,11 +11,11 @@
 
 <script>
 import IconSvg from "./components/common/IconSvg.vue";
-import NavBar from "./components/common/NavBar.vue";
+import NavBar from "./components/common/Navbar.vue";
 import Search from "./components/search/Search.vue";
 import Index from "./components/index/Index.vue";
 import Foot from "./components/common/Foot.vue";
-import LoginDialog from "./components/common/LoginDialog.vue";
+import LoginDialog from "./components/common/loginDialog.vue";
 
 export default {
   components: {

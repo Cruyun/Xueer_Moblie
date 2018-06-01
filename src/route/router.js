@@ -7,7 +7,7 @@ import Search from "../components/course/Search";
 import NewComment from "../components/course/NewComment";
 import Detail from "../components/course/Detail";
 import Subject from "../components/subject/Subject";
-import Landing from "../components/common/landing";
+import Landing from "../components/common/Landing";
 
 Vue.use(VueRouter);
 module.exports = new VueRouter({

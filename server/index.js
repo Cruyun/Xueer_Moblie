@@ -1,14 +1,14 @@
-const send = require('koa-send');
-const Koa = require('koa');
-const Router = require('koa-router');
-const userAgent = require('koa-useragent');
-const path = require('path')
-const swig = require('swig');
-const bodyParser = require('koa-bodyparser');
+const send = require("koa-send");
+const Koa = require("koa");
+const Router = require("koa-router");
+const userAgent = require("koa-useragent");
+const path = require("path");
+const swig = require("swig");
+const bodyParser = require("koa-bodyparser");
 const router = new Router();
 const app = new Koa();
 
-const templateRoot = path.join(__dirname, "../dist/template")
+const templateRoot = path.join(__dirname, "../dist/template");
 
 app.use(userAgent);
 app.use(bodyParser());
@@ -29,9 +29,7 @@ router.get(/^\/(.*)$/, function(ctx, next){
 });
 
 
-app
-    .use(router.routes())
-    .use(router.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(8080);
-console.log('listening on port 8080');
+app.listen(3000);
+console.log("listening on port 3000");

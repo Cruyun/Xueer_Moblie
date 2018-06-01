@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["likes"],
   methods: {
     ...mapActions(["showLogin"]),
     backIndex() {
-      history.go(-1);
+      // history.go(-1);
     },
     likeThis() {
       this.showLogin(true);

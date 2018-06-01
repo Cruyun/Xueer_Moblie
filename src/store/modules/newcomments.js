@@ -25,9 +25,13 @@ const actions = {
     }
   },
   submitComment(context, body) {
-    DetailService.newComment(body.course_id, body.token, body.comment_text).then(res => {
+    DetailService.newComment(
+      body.course_id,
+      body.token,
+      body.comment_text
+    ).then(() => {
       window.location.href = "/course/" + body.course_id;
-    })
+    });
   }
 };
 const mutations = {

@@ -11,8 +11,9 @@
 	 </div>
 </template>
 <script>
-import Cookie from "../../service/cookie.js";
 import { mapState, mapActions } from "vuex";
+import Cookie from "../../service/cookie.js";
+
 export default {
   data() {
     return {
