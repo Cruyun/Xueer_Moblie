@@ -6,7 +6,7 @@
 			<span :class="[$style.info, $style.info_right]">{{ sub_info.date }}</span>
 		</div>
 		<div v-html='sub_info.body' :class="$style.cont"></div>
-		<btns :likes="sub_info.likes"></btns>
+		<btns :likes="sub_info.likes" :liked="sub_info.liked"></btns>
 	</div>
 </template>
 
