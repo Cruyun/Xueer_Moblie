@@ -19,6 +19,7 @@ export default {
 
 <style lang='scss' module>
 .comment_item {
+  font-weight: normal; // 安卓上数字很细，设置一下 weight
   font-size: 0;
   padding-top: 21px;
   border-bottom: 1px solid #ececec; /*px*/

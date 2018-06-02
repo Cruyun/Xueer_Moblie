@@ -2,10 +2,12 @@
     <div @click.self="hideSelector" :class="$style.selector">
         <div :class="$style.selector_cont">
             <div :class="$style.items">
-                <div id="gg_cat" @click="addTag" :class="[$style.item, $style.tag, $style.first_line, selected.indexOf('gg_cat') > -1 ? 'filter-active':'']">公共课</div>
-                <div id="zy_cat" @click="addTag" :class="[$style.item, $style.tag, $style.first_line,  selected.indexOf('zy_cat') > -1 ? 'filter-active':'']">专业课</div>
-                <div id="ts_cat" @click="addTag" :class="[$style.item, $style.tag,  selected.indexOf('ts_cat') > -1 ? 'filter-active':'']">通识课</div>
-                <div id="sz_cat" @click="addTag" :class="[$style.item, $style.tag,  selected.indexOf('sz_cat') > -1 ? 'filter-active':'']">素质课</div>
+                <div id="gg_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom, selected.indexOf('gg_cat') > -1 ? 'filter-active':'']">公共课</div>
+                <div id="zy_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom,  selected.indexOf('zy_cat') > -1 ? 'filter-active':'']">专业课</div>
+                <div id="ts_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom, selected.indexOf('ts_cat') > -1 ? 'filter-active':'']">通识课</div>
+                <div id="sz_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom, selected.indexOf('sz_cat') > -1 ? 'filter-active':'']">素质课</div>
+                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_core" @click="addSubCat(1)" :class="[$style.item, $style.tag,  (subCatgories == 1 || subCatgories == 0) ? 'filter-active':'']">通识选修课</div>
+                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_optional" @click="addSubCat(2)" :class="[$style.item, $style.tag,  (subCatgories == 2 || subCatgories == 0) ? 'filter-active':'']">通识核心课</div>
             </div>
             <div @click="select" :class="[$style.bt, $style.item]">确定</div>
         </div>
@@ -15,7 +17,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  props: ["catgories", "changeSelector"],
+  props: ["catgories", "subCatgories", "changeSelector", "changeSubSelector"],
   data() {
     return {
       isactive: true,
@@ -24,7 +26,7 @@ export default {
   },
   methods: {
     ...mapActions(["showSelector", "fetchCoursesList"]),
-    addTag(e) {
+    addCat(e) {
       const index = this.selected.indexOf(e.target.id);
       if (index == -1) {
         this.selected.push(e.target.id);
@@ -34,6 +36,20 @@ export default {
         const arr = e.target.className.split(" ");
         arr.pop();
         e.target.className = arr.join(" ");
+      }
+    },
+    addSubCat(e) {
+      if (this.subCatgories == e) {
+        if (this.subCatgories == 1) this.changeSubSelector(2);
+        if (this.subCatgories == 2) this.changeSubSelector(1);
+        return;
+      }
+      if (this.subCatgories == 0) {
+        if (e == 1) this.changeSubSelector(2);
+        if (e == 2) this.changeSubSelector(1);
+      } else {
+        if (this.subCatgories == 1) this.changeSubSelector(0);
+        if (this.subCatgories == 2) this.changeSubSelector(0);
       }
     },
     hideSelector() {
@@ -89,7 +105,7 @@ export default {
 .item:nth-child(odd) {
   margin-right: 20px;
 }
-.first_line {
+.margin_bottom {
   margin-bottom: 16px;
 }
 </style>

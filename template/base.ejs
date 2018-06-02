@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="yes" name="apple-mobile-web-app-capable"/>
-        <meta content="yes" name="apple-touch-fullscreen"/>
-        <meta content="telephone=no,email=no" name="format-detection"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <link href="http://xueer.muxixyz.com/static/x_m/favicon/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
-        </script>
-        <title>{% block title %}{% endblock %}</title>
-        {% block css %}{% endblock %}
-    </head>
-    <body>
-    {% block body %}{% endblock %}
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-        <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="yes" name="apple-touch-fullscreen" />
+  <meta content="telephone=no,email=no" name="format-detection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link href="http://xueer.muxixyz.com/static/x_m/favicon/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png" />
+  </script>
+  <title>{% block title %}{% endblock %}</title>
+  {% block css %}{% endblock %}
+</head>
+
+<body>
+  <script>
+    // Retcode 监控
+    !(function (c, b, d, a) {
+    c[a] || (c[a] = {}); c[a].config = { pid: "gfpbzlfh0c@5e413997455ad5c", imgUrl: "https://arms-retcode.aliyuncs.com/r.png?" };
+      with (b) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("crossorigin", "", src = d)
+    })(window, document, "https://retcode.alicdn.com/retcode/bl.js", "__bl");
+  </script> {% block body %}{% endblock %}
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %>
-    {% block script %}{% endblock %}
-    </body>
+      {% block script %}{% endblock %}
+</body>
+
 </html>

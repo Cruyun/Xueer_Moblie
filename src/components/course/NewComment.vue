@@ -10,7 +10,7 @@
 		    <input @keyup.delete="deleteTag" v-model='tags' :class="$style.tag_input" type="text" name="tag" placeholder="输入空格确认">
 			</div>
 		</div>
-    <div :class="$style.hot_pre_tag">热门标签</div>
+    <div :class="$style.hot_pre_tag">热门标签 点击直接添加</div>
 		<tag></tag>
 		<div :class="$style.btns">
 			<div :class="[$style.btn,$style.btn_left]" @click="backStep">返回</div>
@@ -68,6 +68,7 @@ export default {
 @import "../../assets/value.scss";
 
 .new_comment {
+  font-weight: normal;
   padding-top: 17px;
   line-height: 14px;
   font-size: 0;
@@ -84,8 +85,8 @@ export default {
   font-size: 14px; /*px*/
   box-sizing: border-box;
   padding: 17px 18px;
-  border-top: 2px solid #ececec;
-  border-bottom: 2px solid #ececec;
+  border-top: 1px solid #ececec; /*px*/
+  border-bottom: 1px solid #ececec; /*px*/
 }
 .tag_cont {
   position: relative;
@@ -93,7 +94,7 @@ export default {
   justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  border-bottom: 1px solid #cdcdcd;
+  border-bottom: 1px solid #ececec; /*px*/
   padding: 10px 10px;
 }
 .tag_icon {

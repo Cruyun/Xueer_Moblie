@@ -1,6 +1,6 @@
 <template>
 	<div v-scroll="scrollHandler">
-		<selector @change="fetchCoursesList" :changeSelector="changeSelector" v-if="is_selected" :catgories="catgories"/>
+		<selector @change="fetchCoursesList" :subCatgories="subCatgories" :changeSelector="changeSelector" :changeSubSelector="changeSubSelector" v-if="is_selected" :catgories="catgories"/>
 		<reSort @change="fetchCoursesList" :changeSortMethod="changeSortMethod"/>
     <courseList :courses="courses"/>
 		<div v-if='isend' :class="$style.hint">(￣▽￣") 已经是全部的结果啦</div>
@@ -39,7 +39,8 @@ export default {
       loading: state => state.courselist.loading,
       loadingMore: state => state.courselist.loadingMore,
       page: state => state.courselist.page,
-      catgories: state => state.courselist.catgories
+      catgories: state => state.courselist.catgories,
+      subCatgories: state => state.courselist.subCatgories
     }),
     ...mapState(["is_selected"])
   },
@@ -49,7 +50,8 @@ export default {
       "changeSelector",
       "fetchCoursesList",
       "fetchNextCoursesList",
-      "changeSortMethod"
+      "changeSortMethod",
+      "changeSubSelector"
     ]),
     scrollHandler() {
       // 把scroll的位置同步到store，然后在返回列表的时候恢复滚动的位置。
@@ -79,6 +81,7 @@ export default {
 
 <style lang="scss" module>
 .hint {
+  font-weight: normal; // 安卓上数字很细，设置一下 weight
   font-size: 12px; /*px*/
   text-align: center;
   color: #999;

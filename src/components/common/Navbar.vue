@@ -61,8 +61,12 @@ export default {
     },
     toLogin() {
       Cookie.setCookie("url", window.location.href);
+      // for development
       window.location =
-        "https://user.muxixyz.com/?landing=localhost:3000/landing";
+        "https://user.muxixyz.com/?landing=http://192.168.43.46:3000/landing";
+      // for production
+      // window.location =
+      //   "https://user.muxixyz.com/?landing=https://xueer.muxixyz.com/landing";
     }
   },
   mounted() {

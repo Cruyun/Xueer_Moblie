@@ -86,6 +86,7 @@ export default {
 <style lang='scss' module>
 @import "../../assets/value.scss";
 .info {
+  font-weight: normal; // 安卓上数字很细，设置一下 weight
   height: 200px;
   display: flex;
   display: -webkit-flex;
