@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.space">
 	  <div :class="$style.avatar">
-			<img src="http://xueer.muxixyz.com/static/x_m/avatar.png">
+			<img src="https://occc3ev3l.qnssl.com/xueer/m/avatar.png">
 	  </div>
 	  <div :class="$style.content">
 	      <div :class="$style.name">{{ item.user_name }}</div>
@@ -21,11 +21,11 @@
 	        </div>
 				</div>
 	  </div>
-	  <div v-if="item._body" @click="showMore(item)" :class="$style.more">
-	    <svg :class="[item.body == item._body ? [$style.icon_up] : '', $style.more_icon]">
+	  <div v-if="item.bodyTotal" @click="showMore(item)" :class="$style.more">
+	    <svg :class="[item.body == item.bodyTotal ? [$style.icon_up] : '', $style.more_icon]">
 	      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow_down"></use>
 	    </svg>
-			<span v-if="item.body == item._body" :class="$style.more_text">收起</span>
+			<span v-if="item.body == item.bodyTotal" :class="$style.more_text">收起</span>
 	    <span v-else :class="$style.more_text">查看全文</span>
 	  </div>
 	</div>
@@ -64,7 +64,7 @@ export default {
       }
       this.body = item.body;
       /* eslint-disable */
-      item.body = item._body;
+      item.body = item.bodyTotal;
       /* eslint-enable */
     },
     likeComments(item, index) {

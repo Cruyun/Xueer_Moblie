@@ -13,12 +13,12 @@ const actions = {
 };
 const mutations = {
   fetchData(state) {
-    HomeService.getTips()
-      /* fetch('/api/v1.0/tips/').then((response) => {
-			response.json() */
-      .then(json => {
-        state.tips = json;
-      });
+    HomeService.getTips().then(json => {
+      const arr = json.reverse();
+      const last = arr.splice(arr.length - 1, 1)[0];
+      arr.splice(1, 0, last);
+      state.tips = arr;
+    });
   }
 };
 export default {

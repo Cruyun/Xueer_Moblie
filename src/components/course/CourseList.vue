@@ -34,8 +34,7 @@ import { subStr } from "../../filters/filter.js";
 export default {
   data() {
     return {
-      window_height: 0,
-      is_recommend: false
+      window_height: 0
     };
   },
   // computed: {

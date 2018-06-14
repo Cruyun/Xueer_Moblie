@@ -25,13 +25,7 @@ export default {
   },
   mounted() {},
   computed: {
-    ...mapGetters([
-      "result",
-      "search_end",
-      "fetch_flag",
-      "is_search",
-      "is_recommend"
-    ]),
+    ...mapGetters(["result", "search_end", "fetch_flag"]),
     ...mapState({
       page: state => state.courselist.page,
       catgories: state => state.courselist.catgories

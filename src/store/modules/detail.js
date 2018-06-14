@@ -36,7 +36,8 @@ const getters = {
 
 const preprocess = json => {
   json.forEach(element => {
-    if (element.body.length >= 60) {
+    if (element.body.length > 60) {
+      element.bodyTotal = element.body;
       element.body = element.body.substr(0, 60);
     }
   });

@@ -24,7 +24,7 @@
 						<span :class="$style.count">{{ item.likes }}</span>
 					</div>
 				</div>
-				<div :class="$style.time">{{ item.date }}</div>
+				<div :class="$style.time">{{ item.banner_url }}</div>
 			</div>
 			<router-view></router-view>
 		</div>
@@ -110,7 +110,7 @@ export default {
 }
 .count {
   line-height: 20px;
-  font-size: 12px; /*px*/
+  font-size: 12px;
   padding-left: 7px;
 }
 .time {

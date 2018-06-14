@@ -24,11 +24,11 @@ export default {
   methods: {
     ...mapActions(["showLogin", "likeTip", "cancelLike"]),
     backIndex() {
-      history.go(-1);
+      window.history.go(-1);
     },
     likeThis() {
       if (!this.is_logined) this.showLogin(true);
-      else if(!this.liked){
+      else if (!this.liked) {
         this.likeTip();
       } else {
         this.cancelLike();

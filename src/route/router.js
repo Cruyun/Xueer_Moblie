@@ -8,6 +8,8 @@ import NewComment from "../components/course/NewComment";
 import Detail from "../components/course/Detail";
 import Subject from "../components/subject/Subject";
 import Landing from "../components/common/Landing";
+import User from "../components/user";
+import PromotionLanding from "../components/common/promotionLanding";
 
 Vue.use(VueRouter);
 module.exports = new VueRouter({
@@ -45,6 +47,11 @@ module.exports = new VueRouter({
       component: Detail
     },
     {
+      name: "user",
+      path: "/user",
+      component: User
+    },
+    {
       name: "newComment",
       path: "/course/:id/comment",
       component: NewComment
@@ -53,6 +60,11 @@ module.exports = new VueRouter({
       name: "landing",
       path: "/landing",
       component: Landing
+    },
+    {
+      name: "promotionLanding",
+      path: "/promotion/register",
+      component: PromotionLanding
     }
   ]
 });

@@ -33,15 +33,8 @@ export default {
     this.fetchHot();
   },
   computed: {
-    ...mapGetters([
-      "hot",
-      "show_search",
-      "snaps",
-      "result",
-      "is_search",
-      "result"
-    ]),
-    ...mapState(["page_snaps", "search_page"]),
+    ...mapGetters(["hot", "show_search", "result", "result"]),
+    ...mapState(["search_page"]),
     ...mapState({
       catgories: state => state.courselist.catgories
     }),

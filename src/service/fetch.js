@@ -1,4 +1,4 @@
-import encodeUrlParams from "../util";
+import { encodeUrlParams } from "../util";
 
 /**
  *
@@ -33,6 +33,14 @@ export default function FetchData(url, opt = {}) {
   }
 
   return fetch(url, opt).then(response => {
+    // if (response.status === 403) {
+    //   return new Promise((resolve, reject) => {
+    //     reject({
+
+    //     })
+    //   })
+    // }
+    // console.log(response.status)
     return response.json().then(json => {
       switch (response.status) {
         case 200:
@@ -57,9 +65,18 @@ export default function FetchData(url, opt = {}) {
             };
           }
           return json;
+        case 403:
+          return new Promise((resolve, reject) => {
+            reject(
+              new Error({
+                code: response.status,
+                message: json.message
+              })
+            );
+          });
         case 502:
           // util.message is not defined
-          // util.message(response.statusText, "err");
+          // util.3message(response.statusText, "err");
           throw response.statusText;
         default:
           return 0;

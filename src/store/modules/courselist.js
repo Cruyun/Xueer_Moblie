@@ -115,8 +115,6 @@ const mutations = {
     state.page = 1;
     state.courses = [];
     state.loading = true;
-    state.catgories = [];
-    state.subCatgories = 0;
   },
   insertCourses(state, courses) {
     state.courses = state.courses.concat(courses);

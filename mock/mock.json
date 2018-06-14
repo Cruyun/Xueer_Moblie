@@ -12,6 +12,12 @@
       "async": true
     },
     {
+      "name": "promotionLanding",
+      "endpoint": "/promotion/register",
+      "template": "index",
+      "async": false
+    },
+    {
       "name": "landing",
       "endpoint": "/landing",
       "template": "index",

@@ -10,6 +10,7 @@ import detail from "./modules/detail";
 import search from "./modules/search";
 import newcomments from "./modules/newcomments";
 import tag from "./modules/tag";
+import user from "./modules/user";
 import courselist from "./modules/courselist";
 
 Vue.use(Vuex);
@@ -24,7 +25,8 @@ const store = new Vuex.Store({
     search,
     newcomments,
     tag,
-    courselist
+    courselist,
+    user
   },
   mutations
 });

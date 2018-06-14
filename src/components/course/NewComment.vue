@@ -16,17 +16,22 @@
 			<div :class="[$style.btn,$style.btn_left]" @click="backStep">返回</div>
 			<div :class="[$style.btn,$style.btn_right]" @click="setComment">提交</div>
 		</div>
+    <Dialog :show="showDialog" :text="tip"></Dialog>
 	</div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { preTag } from "../../filters/filter.js";
+import Dialog from "../common/commonDialog";
 import Tag from "../common/Tag.vue";
 
 export default {
   data() {
     return {
+      submitting: false,
+      showDialog: false,
+      tip: "",
       tags: "",
       comment_text: "",
       submit_body: {
@@ -49,6 +54,18 @@ export default {
   methods: {
     ...mapActions(["preTags", "deleteTag", "submitComment"]),
     setComment() {
+      if (this.submitting) {
+        return;
+      }
+      if (this.comment_text.length === 0) {
+        this.showDialog = true;
+        this.tip = "请输入评论内容！";
+        setTimeout(() => {
+          this.showDialog = false;
+        }, 1500);
+        return;
+      }
+      this.submitting = true;
       // 发送评论请求的 data
       this.submit_body.course_id = this.info.id;
       this.submit_body.comment_text = this.comment_text;
@@ -60,7 +77,8 @@ export default {
     }
   },
   components: {
-    Tag
+    Tag,
+    Dialog
   }
 };
 </script>

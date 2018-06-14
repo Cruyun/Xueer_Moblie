@@ -19,14 +19,14 @@ ninja start
 
 #### Now
 
-* [x] Add HTML compliation
-* [ ] Recycle View for list
-* [x] Add server side code
-* [x] Muxi auth integration
-* [ ] Full Code Review
-* [ ] Refactor Mangament Service
+- [x] Add HTML compliation
+- [ ] Recycle View for list
+- [x] Add server side code
+- [x] Muxi auth integration
+- [ ] Full Code Review
+- [ ] Refactor Mangament Service
 
 #### Long-term
 
-* [ ] PWA support
-* [ ] UX enchancement
+- [ ] PWA support
+- [ ] UX enchancement

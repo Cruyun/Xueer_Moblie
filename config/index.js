@@ -1,18 +1,20 @@
 // webpack config variables
-var path = require("path");
+const path = require("path");
+const buildEnv = require("./prod.env");
+const devEnv = require("./dev.env");
 
 module.exports = {
   build: {
-    env: require("./prod.env"),
+    env: buildEnv,
     assetsRoot: path.resolve(__dirname, "../dist"),
     assetsSubDirectory: "/static/",
     // assetsPublicPath: 'http://cdn.com/dist/',
-    assetsPublicPath: "/static/",
+    assetsPublicPath: "https://occc3ev3l.qnssl.com/xueer/",
     productionSourceMap: false,
     bundleAnalyzerReport: false
   },
   dev: {
-    env: require("./dev.env"),
+    env: devEnv,
     assetsPublicPath: "/dist/"
   }
 };

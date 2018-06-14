@@ -2,29 +2,6 @@ const mutations = {
   changeCurrentRoute(state, path) {
     state.currentRoute = path;
   },
-  changePageFlagN(state, flag) {
-    if (Object.prototype.toString.call(flag) === "[object String]") {
-      state[flag] = false;
-    } else if (Object.prototype.toString.call(flag) === "[object Array]") {
-      flag.forEach(element => {
-        state[element] = false;
-      });
-    }
-  },
-  changePageFlagY(state, flag) {
-    if (Object.prototype.toString.call(flag) === "[object String]") {
-      state[flag] = true;
-    } else if (Object.prototype.toString.call(flag) === "[object Array]") {
-      flag.forEach(element => {
-        state[element] = true;
-      });
-    }
-  },
-  getSnaps(state, snaps) {
-    Object.entries(snaps).forEach(([key, value]) => {
-      state.page_snaps[key] = value;
-    });
-  },
   isLoading(state, flag) {
     state.is_loading = flag;
   },
@@ -42,6 +19,13 @@ const mutations = {
   },
   isLogin(state) {
     state.is_logined = true;
+  },
+  clearUserData(state) {
+    state.token = "";
+    state.is_logined = false;
+  },
+  setRecommender(state, id) {
+    state.recommender = id;
   }
 };
 

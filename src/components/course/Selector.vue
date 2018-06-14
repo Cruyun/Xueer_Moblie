@@ -6,8 +6,8 @@
                 <div id="zy_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom,  selected.indexOf('zy_cat') > -1 ? 'filter-active':'']">专业课</div>
                 <div id="ts_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom, selected.indexOf('ts_cat') > -1 ? 'filter-active':'']">通识课</div>
                 <div id="sz_cat" @click="addCat" :class="[$style.item, $style.tag, $style.margin_bottom, selected.indexOf('sz_cat') > -1 ? 'filter-active':'']">素质课</div>
-                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_core" @click="addSubCat(1)" :class="[$style.item, $style.tag,  (subCatgories == 1 || subCatgories == 0) ? 'filter-active':'']">通识选修课</div>
-                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_optional" @click="addSubCat(2)" :class="[$style.item, $style.tag,  (subCatgories == 2 || subCatgories == 0) ? 'filter-active':'']">通识核心课</div>
+                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_core" @click="addSubCat(2)" :class="[$style.item, $style.tag,  (subCatgories == 2 || subCatgories == 0) ? 'filter-active':'']">通识选修课</div>
+                <div v-if="selected.indexOf('ts_cat') > -1" id="ts_cat_optional" @click="addSubCat(1)" :class="[$style.item, $style.tag,  (subCatgories == 1 || subCatgories == 0) ? 'filter-active':'']">通识核心课</div>
             </div>
             <div @click="select" :class="[$style.bt, $style.item]">确定</div>
         </div>
@@ -39,17 +39,15 @@ export default {
       }
     },
     addSubCat(e) {
-      if (this.subCatgories == e) {
+      if (e == 1) {
+        if (this.subCatgories == 0) this.changeSubSelector(2);
         if (this.subCatgories == 1) this.changeSubSelector(2);
-        if (this.subCatgories == 2) this.changeSubSelector(1);
-        return;
-      }
-      if (this.subCatgories == 0) {
-        if (e == 1) this.changeSubSelector(2);
-        if (e == 2) this.changeSubSelector(1);
-      } else {
-        if (this.subCatgories == 1) this.changeSubSelector(0);
         if (this.subCatgories == 2) this.changeSubSelector(0);
+      }
+      if (e == 2) {
+        if (this.subCatgories == 0) this.changeSubSelector(1);
+        if (this.subCatgories == 1) this.changeSubSelector(0);
+        if (this.subCatgories == 2) this.changeSubSelector(1);
       }
     },
     hideSelector() {
@@ -57,6 +55,7 @@ export default {
     },
     select() {
       this.hideSelector();
+      console.log(this.selected)
       this.changeSelector(this.selected);
       this.$emit("change");
       this.is_selected

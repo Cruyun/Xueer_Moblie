@@ -7,7 +7,6 @@
 						<svg :class="[$style.logo, $style.flex]">
 							<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo"></use>
 						</svg>
-						<!-- <span v-if="is_search" :class="[$style.title_s, $style.title]">搜索</span> -->
 					</router-link>
 				</div>
 				<div @click="backStep" :class="[$style.flex, $style.align_center]">
@@ -19,11 +18,8 @@
           <span v-if="currentRoute === 'recommend'" :class="[$style.title_l, $style.title]">推荐课程</span>
           <span v-if="currentRoute === 'search'" :class="[$style.title_l, $style.title]">搜索结果</span>
           <span v-if="currentRoute === 'newComment'" :class="[$style.title_l, $style.title]">写评价</span>
-
-					<!-- <span v-if="is_search_res" :class="[$style.title_l, $style.title]">搜索结果</span>
-					<span v-if="is_recommend" :class="[$style.title_l, $style.title]">推荐课程</span>
-					<span v-if="is_auth" :class="[$style.title_l, $style.title]">我的学而</span>
-					<span v-if="is_sub" :class="[$style.title_l, $style.title]">专题</span> -->
+          <span v-if="currentRoute === 'user'" :class="[$style.title_l, $style.title]">我的学而</span>
+					<span v-if="currentRoute === 'tip'" :class="[$style.title_l, $style.title]">专题</span>
 				</div>
 			</div>
 			<div :class="$style.icon_set">
@@ -49,7 +45,7 @@ import Cookie from "../../service/cookie";
 export default {
   computed: {
     ...mapState(["page_flag", "currentRoute"]),
-    ...mapGetters([])
+    ...mapGetters(["is_logined"])
   },
   methods: {
     ...mapActions(["showSearch", "setToken"]),
@@ -60,13 +56,17 @@ export default {
       this.showSearch();
     },
     toLogin() {
-      Cookie.setCookie("url", window.location.href);
-      // for development
-      window.location =
-        "https://user.muxixyz.com/?landing=http://192.168.43.46:3000/landing";
-      // for production
-      // window.location =
-      //   "https://user.muxixyz.com/?landing=https://xueer.muxixyz.com/landing";
+      if (this.is_logined) {
+        this.$router.push({ path: `/user` });
+      } else {
+        Cookie.setCookie("url", window.location.href);
+        // for development
+        // window.location =
+        //   "https://user.muxixyz.com/?landing=192.168.1.13:3000/landing";
+        // for production
+        window.location =
+          "https://user.muxixyz.com/?landing=xueer.muxixyz.com/landing";
+      }
     }
   },
   mounted() {

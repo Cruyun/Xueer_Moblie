@@ -35,12 +35,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.getPosition(document.body.scrollTop);
     this.flag = false;
-    if (to.name === "course") {
-      this.changePageFlagN(["is_index", "is_all"]);
-      this.changePageFlagY("is_course");
-    }
-    this.changePageFlagN(["is_recommend", "is_search", "is_all"]);
-    this.changePageFlagY("is_index");
     next();
   },
   beforeDestory() {

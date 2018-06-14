@@ -5,15 +5,6 @@ const actions = {
   changeCurrentRoute({ commit }, path) {
     commit("changeCurrentRoute", path);
   },
-  changePageFlagN({ commit }, flag) {
-    commit("changePageFlagN", flag);
-  },
-  changePageFlagY({ commit }, flag) {
-    commit("changePageFlagY", flag);
-  },
-  getSnaps({ commit }, snaps) {
-    commit("getSnaps", snaps);
-  },
   isLoading({ commit }, flag) {
     commit("isLoading", flag);
   },
@@ -26,25 +17,41 @@ const actions = {
   initData({ commit }, data) {
     commit("initData", data);
   },
+  logout({ commit }) {
+    Cookie.clearCookie("token");
+    commit("clearUserData");
+  },
+  setRecommender({ commit }, id) {
+    Cookie.setCookie("recommender_id", id);
+    commit("setRecommender", id);
+  },
   getToken({ commit }) {
     const email = SignService.getEmail();
-    SignService.getToken(email).then(res => {
-      if (res !== null && res !== undefined) {
+    let redirectURL = Cookie.getCookie("url");
+    if (!redirectURL) redirectURL = "/";
+    SignService.getToken(email)
+      .then(res => {
         Cookie.setCookie("token", res.token);
         commit("isLoading", false);
-        window.location.href = Cookie.getCookie("url");
-      } else {
+        window.location.href = redirectURL;
+      })
+      .catch(() => {
         SignService.getUsername(email).then(info => {
-          SignService.register(info.username, email).then(() => {
+          const recommender_id = Cookie.getCookie("recommender_id");
+          SignService.register(
+            info.username,
+            email,
+            Number(recommender_id)
+          ).then(() => {
             SignService.getToken(email).then(res => {
               Cookie.setCookie("token", res.token);
+              Cookie.clearCookie("recommender_id");
               commit("isLoading", false);
-              window.location.href = Cookie.getCookie("url");
+              window.location.href = redirectURL;
             });
           });
         });
-      }
-    });
+      });
   },
   setToken({ commit }, token) {
     commit("setToken", token);

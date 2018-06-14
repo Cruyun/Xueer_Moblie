@@ -18,7 +18,7 @@ RUN wget -O- https://raw.githubusercontent.com/aliyun-node/tnvm/master/install.s
 RUN source $HOME/.bashrc \
     && tnvm install "alinode-v$ALINODE_VERSION" \
     && tnvm use "alinode-v$ALINODE_VERSION" \
-    && npm install @alicloud/agenthub -g --registry=https://registry.npm.taobao.org
+    && npm install @alicloud/agenthub -g
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -28,14 +28,14 @@ RUN rm -rf /usr/src/app/node_modules
 
 # Build static file
 RUN source $HOME/.bashrc \
-    && npm install --registry=https://registry.npm.taobao.org \
+    && npm install \
     && npm run build
 
 WORKDIR /usr/src/app/server
 
 # Build server file
 RUN source $HOME/.bashrc \
-   && npm install --registry=https://registry.npm.taobao.org
+   && npm install
 
 EXPOSE 3000
 

@@ -2,7 +2,9 @@ import SubjectService from "../../service/subject";
 import State from "../state";
 
 const state = {
-  sub_info: {}
+  sub_info: {
+    author: ""
+  }
 };
 const getters = {
   sub_info: () => state.sub_info
@@ -13,6 +15,7 @@ const actions = {
       commit("fetchSubject", json);
     });
   },
+<<<<<<< HEAD
   likeTip({ state, commit }, id) {
    SubjectService.likeTip(state.sub_info.id, State.token).then(res => {
      commit("setLike", true)
@@ -22,6 +25,17 @@ const actions = {
     SubjectService.cancelLike(state.sub_info.id, State.token).then(res => {
       commit("setLike", false)
     })
+=======
+  likeTip({ state, commit }) {
+    SubjectService.likeTip(state.sub_info.id, State.token).then(() => {
+      commit("setLike", true);
+    });
+  },
+  cancelLike({ state, commit }) {
+    SubjectService.cancelLike(state.sub_info.id, State.token).then(() => {
+      commit("setLike", false);
+    });
+>>>>>>> b4c48093fdcd9f9dcb97796b99f6c60a2bf52982
   }
 };
 const mutations = {

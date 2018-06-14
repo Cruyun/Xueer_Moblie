@@ -26,20 +26,23 @@ const SignService = {
       }
     });
   },
-  register(username, email) {
-    return Fetch("/api/v1.0/users/", {
+  register(username, email, recommender_id) {
+    return Fetch("/api/v1.0/register/", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization:
-          "Basic ZXlKcFpDSTZNVEY5LlljM0pTbElmRktPd0tKY3g0QXZwX2Y0bEZvUTo=" // btoa(管理员token)
+        "Content-Type": "application/json"
       },
       data: {
         username: decodeURIComponent(username),
         email: decodeURIComponent(email),
         password: "bXV4aTMwNA==", // btoa(muxi304)
-        roleid: 3
+        roleid: 3,
+        recommender_id,
+        qq: "",
+        major: "",
+        phone: "",
+        school: ""
       }
     });
   }

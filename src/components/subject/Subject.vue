@@ -2,8 +2,8 @@
 	<div :class="$style.object">
 		<h2 :class="$style.title">{{ sub_info.title }}</h2>
 		<div :class="$style.tip_info">
-			<span :class="[$style.info, $style.info_left]">{{ sub_info.author }}</span>
-			<span :class="[$style.info, $style.info_right]">{{ sub_info.date }}</span>
+			<span :class="[$style.info, $style.info_left]">{{ sub_info.author.split(" ")[0] }}</span>
+			<span :class="[$style.info, $style.info_right]">{{ sub_info.banner_url }}</span>
 		</div>
 		<div v-html='sub_info.body' :class="$style.cont"></div>
 		<btns :likes="sub_info.likes" :liked="sub_info.liked"></btns>
@@ -18,8 +18,6 @@ export default {
   created() {
     this.isLoading(true);
     this.fetchSubject(this.$route.params.id);
-    this.changePageFlagN("is_index");
-    this.changePageFlagY("is_sub");
   },
   computed: {
     ...mapGetters(["sub_info"])
@@ -30,19 +28,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      "fetchSubject",
-      "changePageFlagN",
-      "changePageFlagY",
-      "isLoading"
-    ])
+    ...mapActions(["fetchSubject", "isLoading"])
   },
   components: {
     Btns
-  },
-  destroyed() {
-    this.changePageFlagY("is_index");
-    this.changePageFlagN("is_sub");
   }
 };
 </script>
